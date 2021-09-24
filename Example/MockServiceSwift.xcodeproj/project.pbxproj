@@ -15,6 +15,11 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		9E9BA9806DAADF83E7AD2B38 /* Pods_MockServiceSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01842C9EC42AEFC176E58AF3 /* Pods_MockServiceSwift_Example.framework */; };
 		CE742697FC418A04122664DB /* Pods_MockServiceSwift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467534A084F2B35B892239E1 /* Pods_MockServiceSwift_Tests.framework */; };
+		D2AADB5126FE65FE0073BC93 /* some_json_file_data_success_response.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */; };
+		D2AADB5226FE65FE0073BC93 /* FooAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */; };
+		D2AADB5326FE65FE0073BC93 /* BarAPI_somePost_Post_error.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */; };
+		D2AADB5426FE65FE0073BC93 /* BarAPI_somePost_Post_success.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4F26FE65FE0073BC93 /* BarAPI_somePost_Post_success.json */; };
+		D2AADB5526FE65FE0073BC93 /* BarAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AADB5026FE65FE0073BC93 /* BarAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +37,7 @@
 		0BCC36560193E663E1906DDA /* Pods-MockServiceSwift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockServiceSwift_Tests.release.xcconfig"; path = "Target Support Files/Pods-MockServiceSwift_Tests/Pods-MockServiceSwift_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		29631B64C5F0FE755D00054D /* Pods-MockServiceSwift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockServiceSwift_Example.release.xcconfig"; path = "Target Support Files/Pods-MockServiceSwift_Example/Pods-MockServiceSwift_Example.release.xcconfig"; sourceTree = "<group>"; };
 		467534A084F2B35B892239E1 /* Pods_MockServiceSwift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MockServiceSwift_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		50F31F83F87B90C2773A7B17 /* MockServiceSwift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = MockServiceSwift.podspec; path = ../MockServiceSwift.podspec; sourceTree = "<group>"; };
+		50F31F83F87B90C2773A7B17 /* MockServiceSwift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MockServiceSwift.podspec; path = ../MockServiceSwift.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		53AA9D6FF51D48511FC2908F /* Pods-MockServiceSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockServiceSwift_Tests.debug.xcconfig"; path = "Target Support Files/Pods-MockServiceSwift_Tests/Pods-MockServiceSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* MockServiceSwift_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockServiceSwift_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,9 +49,14 @@
 		607FACE51AFB9204008FA782 /* MockServiceSwift_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockServiceSwift_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		86F276E8D0C2BC3BF72E49BB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		86F276E8D0C2BC3BF72E49BB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C5970C660F9A5FDD97307A12 /* Pods-MockServiceSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockServiceSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-MockServiceSwift_Example/Pods-MockServiceSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		C7D83BB605AB5B4FECD82499 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		C7D83BB605AB5B4FECD82499 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = some_json_file_data_success_response.json; sourceTree = "<group>"; };
+		D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooAPI.swift; sourceTree = "<group>"; };
+		D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BarAPI_somePost_Post_error.json; sourceTree = "<group>"; };
+		D2AADB4F26FE65FE0073BC93 /* BarAPI_somePost_Post_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BarAPI_somePost_Post_success.json; sourceTree = "<group>"; };
+		D2AADB5026FE65FE0073BC93 /* BarAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +103,7 @@
 		607FACD21AFB9204008FA782 /* Example for MockServiceSwift */ = {
 			isa = PBXGroup;
 			children = (
+				D2AADB4526FE65FE0073BC93 /* Services */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -147,7 +158,6 @@
 				53AA9D6FF51D48511FC2908F /* Pods-MockServiceSwift_Tests.debug.xcconfig */,
 				0BCC36560193E663E1906DDA /* Pods-MockServiceSwift_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -158,6 +168,66 @@
 				467534A084F2B35B892239E1 /* Pods_MockServiceSwift_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2AADB4526FE65FE0073BC93 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D2AADB4626FE65FE0073BC93 /* FooAPI */,
+				D2AADB4B26FE65FE0073BC93 /* BarAPI */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D2AADB4626FE65FE0073BC93 /* FooAPI */ = {
+			isa = PBXGroup;
+			children = (
+				D2AADB4726FE65FE0073BC93 /* Mocks */,
+				D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */,
+			);
+			path = FooAPI;
+			sourceTree = "<group>";
+		};
+		D2AADB4726FE65FE0073BC93 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				D2AADB4826FE65FE0073BC93 /* SomeGet */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		D2AADB4826FE65FE0073BC93 /* SomeGet */ = {
+			isa = PBXGroup;
+			children = (
+				D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */,
+			);
+			path = SomeGet;
+			sourceTree = "<group>";
+		};
+		D2AADB4B26FE65FE0073BC93 /* BarAPI */ = {
+			isa = PBXGroup;
+			children = (
+				D2AADB4C26FE65FE0073BC93 /* Mocks */,
+				D2AADB5026FE65FE0073BC93 /* BarAPI.swift */,
+			);
+			path = BarAPI;
+			sourceTree = "<group>";
+		};
+		D2AADB4C26FE65FE0073BC93 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				D2AADB4D26FE65FE0073BC93 /* SomePost */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		D2AADB4D26FE65FE0073BC93 /* SomePost */ = {
+			isa = PBXGroup;
+			children = (
+				D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */,
+				D2AADB4F26FE65FE0073BC93 /* BarAPI_somePost_Post_success.json */,
+			);
+			path = SomePost;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,6 +297,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -246,9 +317,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2AADB5426FE65FE0073BC93 /* BarAPI_somePost_Post_success.json in Resources */,
+				D2AADB5126FE65FE0073BC93 /* some_json_file_data_success_response.json in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				D2AADB5326FE65FE0073BC93 /* BarAPI_somePost_Post_error.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,7 +405,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2AADB5226FE65FE0073BC93 /* FooAPI.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				D2AADB5526FE65FE0073BC93 /* BarAPI.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
