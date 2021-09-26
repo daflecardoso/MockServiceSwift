@@ -10,28 +10,16 @@ import Foundation
 
 class TargetMocksViewModel {
     
-    var items: [MockTargetEndpoint] {
-        return target.apis
-    }
+    private(set) lazy var items = target.apis
     
-    private let target: ServiceMockApis
+    internal let target: ServiceMockApis
     
     init(target: ServiceMockApis) {
         self.target = target
     }
     
-    var title: String {
-        //return String(describing: target)
-        target.title
-    }
-    
-    func reset(item: MockTargetEndpoint) {
-        item.reset()
-    }
-    
-    func toggleMock(item: MockTargetEndpoint, isOn: Bool) {
-        let mock = item.mock()
-        mock.isEnabled = isOn
-        item.save(item: mock)
+    func toggle(item: MockAPI, isOn: Bool) {
+        item.isEnabled = isOn
+        MockServices.shared.didChangeMock?(item)
     }
 }

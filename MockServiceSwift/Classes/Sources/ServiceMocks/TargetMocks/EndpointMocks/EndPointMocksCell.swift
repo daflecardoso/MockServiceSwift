@@ -55,18 +55,6 @@ class EndPointMocksCell: UITableViewCell {
         return button
     }()
     
-    let deleteButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = MockServices.shared.style.tintColor
-        button.setImage(UIImage(named: "ic_delete")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        button.isHidden = true
-        button.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
-        return button
-    }()
-    
     let seeDetailsButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -78,14 +66,12 @@ class EndPointMocksCell: UITableViewCell {
     }()
     
     lazy var stack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [deleteButton, seeDetailsButton])
+        let stack = UIStackView(arrangedSubviews: [seeDetailsButton])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
         stack.spacing = 8
         return stack
     }()
-    
-    var deleteTapped: (() -> Void)?
     
     var seeDetailsTapped: (() -> Void)?
     
@@ -127,11 +113,7 @@ class EndPointMocksCell: UITableViewCell {
     func set(with api: MockType) {
         nameLabel.text = api.name
         descriptionLabel.text = api.description
-        radioButton.isChecked = api.isEnabled
-    }
-    
-    @objc private func didTapDeleteButton() {
-        deleteTapped?()
+        radioButton.isChecked = api.isSelected
     }
     
     @objc private func didTapSeeDetails() {

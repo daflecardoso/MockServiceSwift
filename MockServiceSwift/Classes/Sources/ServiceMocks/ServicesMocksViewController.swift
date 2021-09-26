@@ -9,24 +9,6 @@
 import Foundation
 import UIKit
 
-public class MockServices {
-    
-    public struct Style {
-        public let tintColor: UIColor = UIColor(red: 0/255, green: 125/255, blue: 250/255, alpha: 1.0)
-    }
-    
-    public static let shared = MockServices()
-    
-    public var style: Style = Style()
-    
-    init() { }
-    
-    public func makeMocksViewController(services: [ServiceMockApis]) -> ServicesMocksViewController {
-        let viewModel = ServicesMocksViewModel(items: services)
-        return ServicesMocksViewController(viewModel: viewModel)
-    }
-}
-
 public class ServicesMocksViewController: UIViewController {
     
     private let viewModel: ServicesMocksViewModel
@@ -72,6 +54,11 @@ public class ServicesMocksViewController: UIViewController {
         setup()
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     private func setup() {
         setupView()
         setupTableView()
@@ -99,6 +86,10 @@ public class ServicesMocksViewController: UIViewController {
                 collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
         }
+    }
+    
+    deinit {
+        print("\(self) deinitialized")
     }
 }
 

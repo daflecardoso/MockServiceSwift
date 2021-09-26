@@ -9,13 +9,76 @@
 import Foundation
 import UIKit
 
-public struct ServiceMockApis {
+public class MockServices {
+    
+    public static let shared = MockServices()
+    
+    public struct Style {
+        public let tintColor: UIColor
+        
+        public init(tintColor: UIColor) {
+            self.tintColor = tintColor
+        }
+    }
+    
+    var style: Style = Style(
+        tintColor: .systemBlue
+    )
+    
+    private var services: [ServiceMockApis] = []
+    
+    private let rootKeyUserDefaults = "MockServiceSwift"
+    
+    public var didChangeMock: ((MockAPI) -> Void)?
+    
+    init() { }
+    
+    public func setStyle(_ style: Style) -> Self {
+        self.style = style
+        return self
+    }
+    
+    public func services(_ services: [ServiceMockApis]) -> Self {
+        self.services = services
+        saveServices(services: services)
+        showStructure()
+        return self
+    }
+    
+    func saveServices(services: [ServiceMockApis]) {
+       
+    }
+    
+    public func showStructure() {
+        
+        services.enumerated().forEach { index, services in
+            print(index + 1, "-", services.title)
+            
+            services.apis.forEach { api in
+                print("    -", api.key)
+                
+                api.items.forEach { mock in
+                    print("      *", mock.fileName, mock.isSelected)
+                }
+                print("\n")
+            }
+            print("\n\n")
+        }
+    }
+    
+    public func makeMocksViewController() -> ServicesMocksViewController {
+        let viewModel = ServicesMocksViewModel(items: services)
+        return ServicesMocksViewController(viewModel: viewModel)
+    }
+}
+
+public class ServiceMockApis {
     let title: String
     let color: UIColor
     let icon: UIImage?
-    let apis: [MockTargetEndpoint]
+    let apis: [MockAPI]
     
-    public init(title: String, color: UIColor, icon: UIImage?, apis: [MockTargetEndpoint]) {
+    public init(title: String, color: UIColor, icon: UIImage?, apis: [MockAPI]) {
         self.title = title
         self.color = color
         self.icon = icon
@@ -23,108 +86,57 @@ public struct ServiceMockApis {
     }
 }
 
-public protocol MockTargetEndpoint {
-    
-    static var cases: [MockTargetEndpoint] { get }
-    
-    var description: String { get }
-    
-    var defaultMocks: [MockType] { get }
-    
-    var requestMethod: String { get }
-    
-    var endpointPath: String { get }
-}
-
 public class MockAPI: Codable {
-    var isEnabled: Bool
-    var items: [MockType]
-    
-    internal init(isEnabled: Bool, items: [MockType]) {
+    public init(key: String,
+                method: String,
+                path: String,
+                description: String,
+                isEnabled: Bool,
+                items: [MockType]) {
+        self.key = key
+        self.method = method
+        self.path = path
+        self.description = description
         self.isEnabled = isEnabled
         self.items = items
+    }
+    
+    public let key: String
+    public let method: String
+    public let path: String
+    public let description: String
+    public var isEnabled: Bool
+    public var items: [MockType]
+    
+    var containerColor: UIColor {
+        isEnabled
+           ? MockServices.shared.style.tintColor.withAlphaComponent(0.3)
+           : UIColor.headerNavigationTint
+    }
+    
+    var countMocks: String {
+        "\(items.count) mocks"
     }
 }
 
 public class MockType: Codable {
     
-    public init(id: String, isEnabled: Bool, name: String, description: String, data: Data) {
-        self.id = id
-        self.isEnabled = isEnabled
+    public init(isSelected: Bool,
+                name: String,
+                description: String,
+                fileName: String) {
+        self.isSelected = isSelected
         self.name = name
         self.description = description
-        self.data = data
+        self.fileName = fileName
     }
     
-    let id: String
-    var isEnabled: Bool
-    let name: String
-    let description: String
-    let data: Data
+    public var isSelected: Bool
+    public let name: String
+    public let description: String
+    public let fileName: String
     
     var isValid: Bool {
         return !name.isEmpty
-    }
-}
-
-public extension MockTargetEndpoint {
-    
-    var key: String {
-        let pieces = String(reflecting: self).split(separator: ".")
-        let contextName = pieces[1]
-        let endPointEnumName = pieces[2]
-        let enumName = endPointEnumName.split(separator: "(").first ?? ""
-        let method = self.requestMethod
-        return "\(contextName).\(enumName).\(method)"
-    }
-    
-    var mockIsOn: Bool {
-        if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
-            if let item = try? JSONDecoder().decode(MockAPI.self, from: savedData) {
-                return item.isEnabled
-            }
-        }
-        return false
-    }
-    
-    func reset() {
-        UserDefaults.standard.removeObject(forKey: key)
-        save(item: mock())
-    }
-    
-    func mock() -> MockAPI {
-        if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
-            if let item = try? JSONDecoder().decode(MockAPI.self, from: savedData) {
-                return item
-            }
-        }
-        return MockAPI(isEnabled: false, items: defaultMocks)
-    }
-    
-    func save(item: MockAPI) {
-        if let encoded = try? JSONEncoder().encode(item) {
-            UserDefaults.standard.set(encoded, forKey: key)
-            print("mock is \(item.isEnabled) for key: \(key)")
-        }
-    }
-    
-    var pathFormated: String {
-        return endpointPath.replacingOccurrences(of: "-1", with: "{some}")
-    }
-    
-    var currentAPIMock: MockAPI? {
-        if let savedData = UserDefaults.standard.object(forKey: key) as? Data {
-            if let item = try? JSONDecoder().decode(MockAPI.self, from: savedData) {
-                return item
-            }
-        }
-        return nil
-    }
-    
-    var currentSavedMock: Data {
-        if let mockItem = currentAPIMock?.items.first(where: { $0.isEnabled }) {
-            return mockItem.data
-        }
-        return Data()
     }
 }

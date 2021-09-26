@@ -61,8 +61,7 @@ class TargetMocksViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .backgroundContainerViews
-        //navigationItem.titleView = UILabel.title()
-        title = viewModel.title
+        navigationItem.titleView = UILabel.title(viewModel.target.title)
     }
 
     private func setupTableView() {
@@ -83,6 +82,10 @@ class TargetMocksViewController: UIViewController {
             ])
         }
     }
+    
+    deinit {
+        print("\(self) deinitialized")
+    }
 }
 
 extension TargetMocksViewController: UICollectionViewDataSource {
@@ -97,11 +100,7 @@ extension TargetMocksViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TargetMocksCell.self), for: indexPath) as! TargetMocksCell
         cell.set(with: item)
         cell.switchChanged = { [unowned self] in
-            self.viewModel.toggleMock(item: item, isOn: cell.switchMock.isOn)
-            self.collectionView.reloadData()
-        }
-        cell.resetButtonTapped = { [unowned self] in
-            self.viewModel.reset(item: item)
+            self.viewModel.toggle(item: item, isOn: cell.switchMock.isOn)
             self.collectionView.reloadData()
         }
         return cell
@@ -118,7 +117,7 @@ extension TargetMocksViewController: UICollectionViewDelegate {
             .pushViewController(viewController, animated: true)
     }
     
-    func makeEndPointMocksViewController(endpoint: MockTargetEndpoint) -> EndPointMocksViewController {
+    func makeEndPointMocksViewController(endpoint: MockAPI) -> EndPointMocksViewController {
         let viewModel = EndPointMocksViewModel(endpoint: endpoint)
         return EndPointMocksViewController(viewModel: viewModel)
     }

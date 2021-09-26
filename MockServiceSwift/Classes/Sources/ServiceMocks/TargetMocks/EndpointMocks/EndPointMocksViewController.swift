@@ -27,21 +27,6 @@ class EndPointMocksViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var addButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Novo mock", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        button.isHidden = true
-        button.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc private func didTapAddButton() {
-        self.navigateToDetails(mock: nil)
-    }
-    
     init(viewModel: EndPointMocksViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -54,11 +39,6 @@ class EndPointMocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.fetch()
     }
     
     private func setup() {
@@ -75,33 +55,32 @@ class EndPointMocksViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .backgroundContainerViews
-        navigationItem.titleView = UILabel.title(viewModel.endpoint.pathFormated)
+        navigationItem.titleView = UILabel.title(viewModel.mock.path)
     }
     
     private func setupTableView() {
         view.addSubview(tableView)
-        view.addSubview(addButton)
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            
-            addButton.topAnchor.constraint(equalTo: tableView.bottomAnchor),
-            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
-    private func navigateToDetails(mock: MockType?) {
-        let viewController = makeAddEditMockViewController(endpoint: viewModel.endpoint, mock: mock)
+    private func navigateToDetails(mock: MockType) {
+        let viewController = makeAddEditMockViewController(endpoint: viewModel.mock, mock: mock)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func makeAddEditMockViewController(endpoint: MockTargetEndpoint, mock: MockType?) -> AddEditMockViewController {
+    func makeAddEditMockViewController(endpoint: MockAPI, mock: MockType) -> AddEditMockViewController {
         let viewModel = AddEditMockViewModel(endpoint: endpoint, mock: mock)
         return AddEditMockViewController(viewModel: viewModel)
+    }
+    
+    deinit {
+        print("\(self) deinitialized")
     }
 }
 
@@ -123,10 +102,7 @@ extension EndPointMocksViewController: UITableViewDataSource {
         let item = viewModel.items[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: cell), for: indexPath) as! EndPointMocksCell
         cell.set(with: item)
-        cell.deleteTapped = { [unowned self] in
-            viewModel.delete(item: item)
-        }
-         
+       
         cell.seeDetailsTapped = { [unowned self] in
             self.navigateToDetails(mock: item)
         }

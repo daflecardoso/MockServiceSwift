@@ -110,7 +110,7 @@ extension String {
         return final
     }
     
-    public var jsonData: Data {
+    public var dataFromJsonFile: Data {
         return Bundle.main.dataFromJsonFile(name: self)
     }
 }

@@ -25,7 +25,7 @@ class TargetMocksCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .bold(14)
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         return label
     }()
     
@@ -43,23 +43,7 @@ class TargetMocksCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .medium(12)
         label.textColor = .warmGrey
-        label.numberOfLines = 0
         return label
-    }()
-    
-    lazy var resetButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = .bold(12)
-        button.setTitleColor(MockServices.shared.style.tintColor, for: .normal)
-        button.setTitle("Reset", for: .normal)
-        if #available(iOS 11.0, *) {
-            button.contentHorizontalAlignment = .leading
-        } else {
-            button.contentHorizontalAlignment = .left
-        }
-        button.addTarget(self, action: #selector(didTapResetButton), for: .touchUpInside)
-        return button
     }()
     
     lazy var switchMock: UISwitch = {
@@ -70,21 +54,12 @@ class TargetMocksCell: UICollectionViewCell {
         return swt
     }()
     
-    private lazy var stackSwitch = UIStackView(arrangedSubviews: [
-        resetButton,
-        switchMock
-    ]).apply {
-        $0.axis = .horizontal
-        $0.spacing = 4
-    }
-    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             methodLabel,
             userNameLabel,
             descriptionLabel,
-            countMocks,
-            stackSwitch
+            countMocks
         ])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -103,8 +78,6 @@ class TargetMocksCell: UICollectionViewCell {
     }()
     
     var switchChanged: (() -> Void)?
-    
-    var resetButtonTapped: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -127,7 +100,7 @@ class TargetMocksCell: UICollectionViewCell {
     private func setupConstraints() {
         contentView.addSubview(containerView)
         containerView.addSubview(stackView)
-        
+        containerView.addSubview(switchMock)
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -141,26 +114,23 @@ class TargetMocksCell: UICollectionViewCell {
             stackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
             stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 8).apply {
                 $0.priority = .defaultLow
-            }
+            },
+            
+            switchMock.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            switchMock.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
         ])
     }
     
-    func set(with api: MockTargetEndpoint) {
-        methodLabel.text = api.requestMethod
-        userNameLabel.text = api.pathFormated
+    func set(with api: MockAPI) {
+        methodLabel.text = api.method
+        userNameLabel.text = api.path
         descriptionLabel.text = api.description
-        switchMock.isOn = api.mockIsOn
-        containerView.backgroundColor =  api.mockIsOn
-            ? MockServices.shared.style.tintColor.withAlphaComponent(0.3)
-            : UIColor.headerNavigationTint
-        countMocks.text = "\(api.currentAPIMock?.items.count ?? 0) mocks"
+        switchMock.isOn = api.isEnabled
+        containerView.backgroundColor =  api.containerColor
+        countMocks.text = api.countMocks
     }
     
     @objc private func didChangeSwitch() {
         switchChanged?()
-    }
-    
-    @objc private func didTapResetButton() {
-        resetButtonTapped?()
     }
 }

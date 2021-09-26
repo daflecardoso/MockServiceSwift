@@ -10,16 +10,21 @@ import MockServiceSwift
 
 enum FooAPI {
     case someGet, somePost, somePut, someDelete
-}
-
-extension FooAPI: MockTargetEndpoint {
     
-    static var cases: [MockTargetEndpoint] {
+    var key: String {
+        let pieces = String(reflecting: self).split(separator: ".")
+        let contextName = pieces[1]
+        let endPointEnumName = pieces[2]
+        let enumName = endPointEnumName.split(separator: "(").first ?? ""
+        return "\(contextName).\(enumName).\(method)"
+    }
+    
+    static var apis: [MockAPI] {
         return [
-            FooAPI.someGet,
-            FooAPI.somePost,
-            FooAPI.somePut,
-            FooAPI.someDelete
+            FooAPI.someGet.mock,
+            FooAPI.somePost.mock,
+            FooAPI.somePut.mock,
+            FooAPI.someDelete.mock
         ]
     }
     
@@ -36,26 +41,7 @@ extension FooAPI: MockTargetEndpoint {
         }
     }
     
-    var defaultMocks: [MockType] {
-        switch self {
-        case .someGet:
-            return [
-                .init(id: UUID().uuidString,
-                      isEnabled: true,
-                      name: "Sucesso",
-                      description: "Cenário de sucesso com 2 itens",
-                      data: "some_json_file_data_success_response".jsonData)
-            ]
-        case .somePost:
-            return []
-        case .somePut:
-            return []
-        case .someDelete:
-            return []
-        }
-    }
-    
-    var requestMethod: String {
+    var method: String {
         switch self {
         case .someGet:
             return "GET"
@@ -68,7 +54,7 @@ extension FooAPI: MockTargetEndpoint {
         }
     }
     
-    var endpointPath: String {
+    var path: String {
         switch self {
         case .someGet:
             return "/v1/some"
@@ -78,6 +64,56 @@ extension FooAPI: MockTargetEndpoint {
             return "/v1/update/{some}"
         case .someDelete:
             return "/v1/delete/{some}"
+        }
+    }
+    
+    var mock: MockAPI {
+        switch self {
+        case .someGet:
+            return MockAPI(key: key,
+                           method: method,
+                           path: path,
+                           description: description,
+                           isEnabled: true,
+                           items: [
+                            .init(isSelected: true,
+                                  name: "Success",
+                                  description: "Success response two itens",
+                                  fileName: "some_json_file_data_success_response"),
+                            .init(isSelected: false,
+                                  name: "Error",
+                                  description: "Success response two itens",
+                                  fileName: "some_json_file_data_success_response_none"),
+                            .init(isSelected: false,
+                                  name: "Error2",
+                                  description: "Success response two itens",
+                                  fileName: "some_json_file_data_success_response_none2"),
+                            .init(isSelected: false,
+                                  name: "Error3",
+                                  description: "Success response two itens",
+                                  fileName: "some_json_file_data_success_response_none3")
+                           ])
+        case .somePost:
+            return MockAPI(key: key,
+                           method: method,
+                           path: path,
+                           description: description,
+                           isEnabled: false,
+                           items: [])
+        case .somePut:
+            return MockAPI(key: key,
+                           method: method,
+                           path: path,
+                           description: description,
+                           isEnabled: false,
+                           items: [])
+        case .someDelete:
+            return MockAPI(key: key,
+                           method: method,
+                           path: path,
+                           description: description,
+                           isEnabled: false,
+                           items: [])
         }
     }
 }

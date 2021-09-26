@@ -30,27 +30,61 @@ class ViewController: UIViewController {
             showButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
         
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("start 😀")
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            
+            if let data = value as? Data {
+                if let str = String(data: data, encoding: .utf8) {
+                    print("\(key) = \(str) \n")
+                }
+                
+            }
+        }
+        print("end 😀")
     }
     
     @objc private func didTapShowButton() {
         
-        let viewController = MockServices.shared.makeMocksViewController(services: [
+        let style = MockServices.Style(tintColor: .systemBlue)
+        
+        let services = [
             ServiceMockApis(
                 title: "fooAPI",
-                color: .red,
+                color: .systemBlue,
                 icon: UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
-                apis: FooAPI.cases
+                apis: FooAPI.apis
             ),
             ServiceMockApis(
                 title: "barAPI",
-                color: .blue,
+                color: .systemRed,
                 icon:  UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
-                apis: BarAPI.cases
+                apis: []
             )
-        ])
+        ]
+        
+        let mockService = MockServices.shared
+            .setStyle(style)
+            .services(services)
+        
+        
+        mockService.didChangeMock = { [weak self] mock in
+            print("key", mock.key)
+            print("isEnabled", mock.isEnabled)
+            print("selected file", mock.items.first(where: { $0.isSelected })?.fileName ?? "nil")
+            print("\n\n")
+        }
+        
+         let viewController =  mockService.makeMocksViewController()
         
         let navigation = UINavigationController(rootViewController: viewController)
-        navigation.modalPresentationStyle = .overFullScreen
+      //  navigation.modalPresentationStyle = .overFullScreen
         present(navigation, animated: true, completion: nil)
     }
 }

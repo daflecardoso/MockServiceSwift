@@ -62,8 +62,5 @@ extension UIColor {
         }
     }()
     
-   // static let blueBlue: UIColor = .blue
-    
-    //static let warmGrey = UIColor(named: "warmGray")!
     static let warmGrey: UIColor = .lightGray
 }
