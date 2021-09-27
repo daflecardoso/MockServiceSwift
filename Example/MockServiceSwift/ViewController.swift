@@ -52,26 +52,18 @@ class ViewController: UIViewController {
     
     @objc private func didTapShowButton() {
         
-        let style = MockServices.Style(tintColor: .systemBlue)
-        
-        let services = [
-            ServiceMockApis(
-                title: "fooAPI",
-                color: .systemBlue,
-                icon: UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
-                apis: FooAPI.apis
-            ),
-            ServiceMockApis(
-                title: "barAPI",
-                color: .systemRed,
-                icon:  UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
-                apis: []
-            )
-        ]
-        
         let mockService = MockServices.shared
-            .setStyle(style)
-            .services(services)
+            .setStyle(MockServices.Style(tintColor: .systemBlue))
+            .services([
+                FooAPI.self
+            ].map {
+                ServiceMockApis(
+                    title: String(describing: $0),
+                    color: .systemBlue,
+                    icon: UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
+                    apis: $0.apis
+                )
+            })
         
         
         mockService.didChangeMock = { [weak self] mock in
