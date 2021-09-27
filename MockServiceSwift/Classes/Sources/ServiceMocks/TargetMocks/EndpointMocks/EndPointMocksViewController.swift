@@ -55,7 +55,7 @@ class EndPointMocksViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .backgroundContainerViews
-        navigationItem.titleView = UILabel.title(viewModel.mock.path)
+        navigationItem.titleView = UILabel.title(viewModel.mock.mockPath)
     }
     
     private func setupTableView() {

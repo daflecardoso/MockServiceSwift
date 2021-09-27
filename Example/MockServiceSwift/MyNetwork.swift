@@ -22,7 +22,7 @@ class MyNetwork {
         }
         
         print("from network...")
-        let request = URLRequest(url: URL(string: api.baseUrl + api.path)!)
+        let request = URLRequest(url: URL(string: api.baseUrl + api.mockPath)!)
         URLSession.shared.dataTask(with: request) { data, _, error in
             DispatchQueue.main.async {
                 if let error = error {

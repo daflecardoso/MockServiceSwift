@@ -122,8 +122,8 @@ class TargetMocksCell: UICollectionViewCell {
     }
     
     func set(with api: EndpointMock) {
-        methodLabel.text = api.method
-        userNameLabel.text = api.path
+        methodLabel.text = api.mockMethod
+        userNameLabel.text = api.mockPath
         descriptionLabel.text = api.description
         
         let isEnabled = api.isEnabled

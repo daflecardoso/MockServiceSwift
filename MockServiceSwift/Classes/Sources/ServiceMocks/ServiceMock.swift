@@ -27,13 +27,9 @@ public class MockServices {
     
     private var services: [ServiceMockApis] = []
     
-    private let rootKeyUserDefaults = "MockServiceSwift"
-    
     var defaults: UserDefaults {
         return UserDefaults.standard
     }
-    
-    public var didChangeMock: ((EndpointMock) -> Void)?
     
     init() { }
 
@@ -70,8 +66,8 @@ public class ServiceMockApis {
 public protocol EndpointMock: Codable {
     static var apis: [EndpointMock] { get }
     var description: String { get }
-    var method: String { get }
-    var path: String { get }
+    var mockMethod: String { get }
+    var mockPath: String { get }
     var mocks: [ResponseMock] { get }
     var key: String { get }
 }
@@ -84,7 +80,7 @@ extension EndpointMock {
             let contextName = pieces[1]
             let endPointEnumName = pieces[2]
             let enumName = endPointEnumName.split(separator: "(").first ?? ""
-            return "\(contextName).\(enumName).\(method)"
+            return "\(contextName).\(enumName).\(mockMethod)"
         }
         return ""
     }

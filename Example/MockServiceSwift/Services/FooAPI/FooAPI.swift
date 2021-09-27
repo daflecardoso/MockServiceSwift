@@ -40,7 +40,7 @@ extension FooAPI: EndpointMock {
         }
     }
     
-    var method: String {
+    var mockMethod: String {
         switch self {
         case .someGet:
             return "GET"
@@ -53,7 +53,7 @@ extension FooAPI: EndpointMock {
         }
     }
     
-    var path: String {
+    var mockPath: String {
         switch self {
         case .someGet:
             return "/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8"
