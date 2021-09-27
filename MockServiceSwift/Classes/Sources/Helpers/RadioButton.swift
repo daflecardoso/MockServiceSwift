@@ -2,14 +2,26 @@ import UIKit
 
 class RadioButton: UIButton {
     
-    var radioSelected: UIImage? {
+    static let resourceBundle: Bundle = {
+        let bundleName = "Resources"
         let bundle = Bundle(for: RadioButton.self)
-        return UIImage(named: "ic_radio_selected", in: bundle, compatibleWith: nil)
+        
+        guard let resourceBundleURL = bundle.url(forResource: bundleName, withExtension: "bundle") else { return Bundle.main
+        }
+        
+        guard let resourceBundle = Bundle(url: resourceBundleURL) else {
+            return Bundle.main
+        }
+        
+        return resourceBundle
+    }()
+    
+    var radioSelected: UIImage? {
+        return UIImage(named: "ic_radio_selected", in: RadioButton.resourceBundle, compatibleWith: nil)
     }
     
     var radioUnselectedSelected: UIImage? {
-        let bundle = Bundle(for: RadioButton.self)
-        return UIImage(named: "ic_radio_unselected", in: bundle, compatibleWith: nil)
+        return UIImage(named: "ic_radio_unselected", in: RadioButton.resourceBundle, compatibleWith: nil)
     }
     
     var isChecked: Bool {

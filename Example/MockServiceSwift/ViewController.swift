@@ -75,7 +75,6 @@ class ViewController: UIViewController {
         
         let viewController = MockServices.shared
             .setStyle(MockServices.Style(tintColor: .systemBlue))
-            .reset(true)
             .services(services)
             .makeMocksViewController()
         

@@ -36,12 +36,7 @@ public class MockServices {
     public var didChangeMock: ((EndpointMock) -> Void)?
     
     init() { }
-    
-    public func reset(_ reset: Bool) -> Self {
-        //clear all data
-        return self
-    }
-    
+
     public func setStyle(_ style: Style) -> Self {
         self.style = style
         return self
@@ -49,36 +44,7 @@ public class MockServices {
     
     public func services(_ services: [ServiceMockApis]) -> Self {
         self.services = services
-        saveServices(services: services)
-        showStructure()
         return self
-    }
-    
-    func saveServices(services: [ServiceMockApis]) {
-       
-    }
-    
-    public func showStructure() {
-        
-        print("start 😀")
-        for (key, value) in defaults.dictionaryRepresentation() {
-            print("\(key) = \(value) \n")
-        }
-        print("end 😀")
-        
-        services.enumerated().forEach { index, services in
-            print(index + 1, "-", services.title)
-            
-            services.apis.forEach { api in
-                print("    -", api.key)
-                
-                api.mocks.forEach { mock in
-                    print("      *", mock.fileName)
-                }
-                print("\n")
-            }
-            print("\n\n")
-        }
     }
     
     public func makeMocksViewController() -> ServicesMocksViewController {
