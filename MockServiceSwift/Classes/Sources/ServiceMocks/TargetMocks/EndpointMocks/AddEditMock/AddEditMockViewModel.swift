@@ -10,12 +10,12 @@ import Foundation
 
 class AddEditMockViewModel {
     
-    private let endpoint: MockAPI
-    internal let mockItem: MockType
+    private let endpoint: EndpointMock
+    internal let mockItem: ResponseMock
     
     var saved: (() -> Void)?
     
-    init(endpoint: MockAPI, mock: MockType) {
+    init(endpoint: EndpointMock, mock: ResponseMock) {
         self.endpoint = endpoint
         self.mockItem = mock
     }

@@ -18,8 +18,9 @@ class TargetMocksViewModel {
         self.target = target
     }
     
-    func toggle(item: MockAPI, isOn: Bool) {
-        item.isEnabled = isOn
+    func toggle(item: EndpointMock, isOn: Bool) {
+        var itemCopy = item
+        itemCopy.isEnabled = isOn
         MockServices.shared.didChangeMock?(item)
     }
 }

@@ -12,19 +12,25 @@ class EndPointMocksViewModel {
     
     var reload: (() -> Void)?
     
-    private(set) lazy var items: [MockType] = mock.items
+    private(set) lazy var items: [ResponseMock] = mock.mocks
     
-    internal let mock: MockAPI
+    internal let mock: EndpointMock
     
-    init(endpoint: MockAPI) {
+    var key: String {
+        "\(mock.key).file"
+    }
+    
+    init(endpoint: EndpointMock) {
         self.mock = endpoint
     }
     
-    func didTapEndPoint(selectedItem: MockType) {
-        items.forEach { i in
-            i.isSelected = i.fileName == selectedItem.fileName
-        }
+    func didTapEndPoint(selectedItem: ResponseMock) {
+        MockServices.shared.defaults.set(selectedItem.fileName, forKey: key)
         reload?()
-        MockServices.shared.didChangeMock?(mock)
+    }
+    
+    func isSelected(item: ResponseMock) -> Bool {
+        let storedFileName = MockServices.shared.defaults.string(forKey: key)
+        return item.fileName == storedFileName
     }
 }

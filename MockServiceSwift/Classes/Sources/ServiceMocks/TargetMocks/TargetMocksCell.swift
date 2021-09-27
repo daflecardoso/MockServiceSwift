@@ -121,13 +121,18 @@ class TargetMocksCell: UICollectionViewCell {
         ])
     }
     
-    func set(with api: MockAPI) {
+    func set(with api: EndpointMock) {
         methodLabel.text = api.method
         userNameLabel.text = api.path
         descriptionLabel.text = api.description
-        switchMock.isOn = api.isEnabled
-        containerView.backgroundColor =  api.containerColor
-        countMocks.text = api.countMocks
+        
+        let isEnabled = api.isEnabled
+        let containerColor = isEnabled
+           ? MockServices.shared.style.tintColor.withAlphaComponent(0.3)
+           : UIColor.headerNavigationTint
+        switchMock.isOn = isEnabled
+        containerView.backgroundColor =  containerColor
+        countMocks.text = "\(api.mocks.count) mocks"
     }
     
     @objc private func didChangeSwitch() {

@@ -69,12 +69,12 @@ class EndPointMocksViewController: UIViewController {
         ])
     }
     
-    private func navigateToDetails(mock: MockType) {
+    private func navigateToDetails(mock: ResponseMock) {
         let viewController = makeAddEditMockViewController(endpoint: viewModel.mock, mock: mock)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func makeAddEditMockViewController(endpoint: MockAPI, mock: MockType) -> AddEditMockViewController {
+    func makeAddEditMockViewController(endpoint: EndpointMock, mock: ResponseMock) -> AddEditMockViewController {
         let viewModel = AddEditMockViewModel(endpoint: endpoint, mock: mock)
         return AddEditMockViewController(viewModel: viewModel)
     }
@@ -101,8 +101,9 @@ extension EndPointMocksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = viewModel.items[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: cell), for: indexPath) as! EndPointMocksCell
+        
         cell.set(with: item)
-       
+        cell.radioButton.isChecked = viewModel.isSelected(item: item)
         cell.seeDetailsTapped = { [unowned self] in
             self.navigateToDetails(mock: item)
         }

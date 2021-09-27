@@ -110,10 +110,9 @@ class EndPointMocksCell: UITableViewCell {
         ])
     }
     
-    func set(with api: MockType) {
+    func set(with api: ResponseMock) {
         nameLabel.text = api.name
         descriptionLabel.text = api.description
-        radioButton.isChecked = api.isSelected
     }
     
     @objc private func didTapSeeDetails() {

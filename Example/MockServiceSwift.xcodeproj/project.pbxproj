@@ -15,6 +15,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		9E9BA9806DAADF83E7AD2B38 /* Pods_MockServiceSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01842C9EC42AEFC176E58AF3 /* Pods_MockServiceSwift_Example.framework */; };
 		CE742697FC418A04122664DB /* Pods_MockServiceSwift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467534A084F2B35B892239E1 /* Pods_MockServiceSwift_Tests.framework */; };
+		D2A4FEDE270247F2003F3D90 /* MyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4FEDD270247F2003F3D90 /* MyNetwork.swift */; };
 		D2AADB5126FE65FE0073BC93 /* some_json_file_data_success_response.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */; };
 		D2AADB5226FE65FE0073BC93 /* FooAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */; };
 		D2AADB5326FE65FE0073BC93 /* BarAPI_somePost_Post_error.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */; };
@@ -52,6 +53,7 @@
 		86F276E8D0C2BC3BF72E49BB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C5970C660F9A5FDD97307A12 /* Pods-MockServiceSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockServiceSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-MockServiceSwift_Example/Pods-MockServiceSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C7D83BB605AB5B4FECD82499 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		D2A4FEDD270247F2003F3D90 /* MyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNetwork.swift; sourceTree = "<group>"; };
 		D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = some_json_file_data_success_response.json; sourceTree = "<group>"; };
 		D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooAPI.swift; sourceTree = "<group>"; };
 		D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BarAPI_somePost_Post_error.json; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				D2A4FEDD270247F2003F3D90 /* MyNetwork.swift */,
 			);
 			name = "Example for MockServiceSwift";
 			path = MockServiceSwift;
@@ -406,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2AADB5226FE65FE0073BC93 /* FooAPI.swift in Sources */,
+				D2A4FEDE270247F2003F3D90 /* MyNetwork.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				D2AADB5526FE65FE0073BC93 /* BarAPI.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

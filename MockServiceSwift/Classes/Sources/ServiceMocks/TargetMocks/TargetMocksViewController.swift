@@ -101,7 +101,7 @@ extension TargetMocksViewController: UICollectionViewDataSource {
         cell.set(with: item)
         cell.switchChanged = { [unowned self] in
             self.viewModel.toggle(item: item, isOn: cell.switchMock.isOn)
-            self.collectionView.reloadData()
+            self.collectionView.reloadItems(at: [indexPath])
         }
         return cell
     }
@@ -117,7 +117,7 @@ extension TargetMocksViewController: UICollectionViewDelegate {
             .pushViewController(viewController, animated: true)
     }
     
-    func makeEndPointMocksViewController(endpoint: MockAPI) -> EndPointMocksViewController {
+    func makeEndPointMocksViewController(endpoint: EndpointMock) -> EndPointMocksViewController {
         let viewModel = EndPointMocksViewModel(endpoint: endpoint)
         return EndPointMocksViewController(viewModel: viewModel)
     }

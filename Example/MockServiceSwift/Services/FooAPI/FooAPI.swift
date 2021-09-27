@@ -11,20 +11,19 @@ import MockServiceSwift
 enum FooAPI {
     case someGet, somePost, somePut, someDelete
     
-    var key: String {
-        let pieces = String(reflecting: self).split(separator: ".")
-        let contextName = pieces[1]
-        let endPointEnumName = pieces[2]
-        let enumName = endPointEnumName.split(separator: "(").first ?? ""
-        return "\(contextName).\(enumName).\(method)"
+    var baseUrl: String {
+        return "https://mocki.io"
     }
+}
+
+extension FooAPI: EndpointMock {
     
-    static var apis: [MockAPI] {
-        return [
-            FooAPI.someGet.mock,
-            FooAPI.somePost.mock,
-            FooAPI.somePut.mock,
-            FooAPI.someDelete.mock
+    static var apis: [EndpointMock] {
+        [
+            FooAPI.someGet,
+            FooAPI.somePost,
+            FooAPI.somePut,
+            FooAPI.someDelete
         ]
     }
     
@@ -57,7 +56,7 @@ enum FooAPI {
     var path: String {
         switch self {
         case .someGet:
-            return "/v1/some"
+            return "/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8"
         case .somePost:
             return "/v1/create"
         case .somePut:
@@ -67,53 +66,29 @@ enum FooAPI {
         }
     }
     
-    var mock: MockAPI {
+    var mocks: [ResponseMock] {
         switch self {
         case .someGet:
-            return MockAPI(key: key,
-                           method: method,
-                           path: path,
-                           description: description,
-                           isEnabled: true,
-                           items: [
-                            .init(isSelected: true,
-                                  name: "Success",
-                                  description: "Success response two itens",
-                                  fileName: "some_json_file_data_success_response"),
-                            .init(isSelected: false,
-                                  name: "Error",
-                                  description: "Success response two itens",
-                                  fileName: "some_json_file_data_success_response_none"),
-                            .init(isSelected: false,
-                                  name: "Error2",
-                                  description: "Success response two itens",
-                                  fileName: "some_json_file_data_success_response_none2"),
-                            .init(isSelected: false,
-                                  name: "Error3",
-                                  description: "Success response two itens",
-                                  fileName: "some_json_file_data_success_response_none3")
-                           ])
+            return [
+                .init(name: "Success",
+                      description: "Success response two itens",
+                      fileName: "some_json_file_data_success_response"),
+                .init(name: "Error",
+                      description: "Success response two itens",
+                      fileName: "some_json_file_data_success_response_none"),
+                .init(name: "Error2",
+                      description: "Success response two itens",
+                      fileName: "some_json_file_data_success_response_none2"),
+                .init(name: "Error3",
+                      description: "Success response two itens",
+                      fileName: "some_json_file_data_success_response_none3")
+            ]
         case .somePost:
-            return MockAPI(key: key,
-                           method: method,
-                           path: path,
-                           description: description,
-                           isEnabled: false,
-                           items: [])
+            return []
         case .somePut:
-            return MockAPI(key: key,
-                           method: method,
-                           path: path,
-                           description: description,
-                           isEnabled: false,
-                           items: [])
+            return []
         case .someDelete:
-            return MockAPI(key: key,
-                           method: method,
-                           path: path,
-                           description: description,
-                           isEnabled: false,
-                           items: [])
+            return []
         }
     }
 }

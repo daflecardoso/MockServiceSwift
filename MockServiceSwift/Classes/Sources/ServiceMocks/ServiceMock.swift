@@ -29,9 +29,18 @@ public class MockServices {
     
     private let rootKeyUserDefaults = "MockServiceSwift"
     
-    public var didChangeMock: ((MockAPI) -> Void)?
+    var defaults: UserDefaults {
+        return UserDefaults.standard
+    }
+    
+    public var didChangeMock: ((EndpointMock) -> Void)?
     
     init() { }
+    
+    public func reset(_ reset: Bool) -> Self {
+        //clear all data
+        return self
+    }
     
     public func setStyle(_ style: Style) -> Self {
         self.style = style
@@ -51,14 +60,20 @@ public class MockServices {
     
     public func showStructure() {
         
+        print("start 😀")
+        for (key, value) in defaults.dictionaryRepresentation() {
+            print("\(key) = \(value) \n")
+        }
+        print("end 😀")
+        
         services.enumerated().forEach { index, services in
             print(index + 1, "-", services.title)
             
             services.apis.forEach { api in
                 print("    -", api.key)
                 
-                api.items.forEach { mock in
-                    print("      *", mock.fileName, mock.isSelected)
+                api.mocks.forEach { mock in
+                    print("      *", mock.fileName)
                 }
                 print("\n")
             }
@@ -76,9 +91,9 @@ public class ServiceMockApis {
     let title: String
     let color: UIColor
     let icon: UIImage?
-    let apis: [MockAPI]
+    let apis: [EndpointMock]
     
-    public init(title: String, color: UIColor, icon: UIImage?, apis: [MockAPI]) {
+    public init(title: String, color: UIColor, icon: UIImage?, apis: [EndpointMock]) {
         self.title = title
         self.color = color
         self.icon = icon
@@ -86,52 +101,53 @@ public class ServiceMockApis {
     }
 }
 
-public class MockAPI: Codable {
-    public init(key: String,
-                method: String,
-                path: String,
-                description: String,
-                isEnabled: Bool,
-                items: [MockType]) {
-        self.key = key
-        self.method = method
-        self.path = path
-        self.description = description
-        self.isEnabled = isEnabled
-        self.items = items
+public protocol EndpointMock: Codable {
+    static var apis: [EndpointMock] { get }
+    var description: String { get }
+    var method: String { get }
+    var path: String { get }
+    var mocks: [ResponseMock] { get }
+    var key: String { get }
+}
+
+extension EndpointMock {
+    
+    public var key: String {
+        let pieces = String(reflecting: self).split(separator: ".")
+        if pieces.count > 2 {
+            let contextName = pieces[1]
+            let endPointEnumName = pieces[2]
+            let enumName = endPointEnumName.split(separator: "(").first ?? ""
+            return "\(contextName).\(enumName).\(method)"
+        }
+        return ""
     }
     
-    public let key: String
-    public let method: String
-    public let path: String
-    public let description: String
-    public var isEnabled: Bool
-    public var items: [MockType]
-    
-    var containerColor: UIColor {
-        isEnabled
-           ? MockServices.shared.style.tintColor.withAlphaComponent(0.3)
-           : UIColor.headerNavigationTint
+    public var isEnabled: Bool {
+        get { MockServices.shared.defaults.bool(forKey: "\(key).isEnabled") }
+        set { MockServices.shared.defaults.set(newValue, forKey: "\(key).isEnabled") }
     }
     
-    var countMocks: String {
-        "\(items.count) mocks"
+    public var json: String {
+        let storeFileKey = "\(key).file"
+        let storedFileName = MockServices.shared.defaults.string(forKey: storeFileKey)
+        let currentMock = mocks.first(where: { $0.fileName == storedFileName })
+        let fileName = (currentMock?.fileName ?? "")
+        let data = fileName.dataFromJsonFile
+        return String(data: data, encoding: .utf8) ?? ""
     }
 }
 
-public class MockType: Codable {
+public class ResponseMock: Codable {
     
-    public init(isSelected: Bool,
-                name: String,
+    public init(name: String,
                 description: String,
                 fileName: String) {
-        self.isSelected = isSelected
         self.name = name
         self.description = description
         self.fileName = fileName
     }
     
-    public var isSelected: Bool
     public let name: String
     public let description: String
     public let fileName: String
