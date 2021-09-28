@@ -69,6 +69,10 @@ public protocol EndpointMock: Codable {
     var mockMethod: String { get }
     var mockPath: String { get }
     var mocks: [ResponseMock] { get }
+    
+    /**
+        Stored key mock
+     */
     var key: String { get }
 }
 

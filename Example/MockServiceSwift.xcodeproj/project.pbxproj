@@ -16,6 +16,9 @@
 		9E9BA9806DAADF83E7AD2B38 /* Pods_MockServiceSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01842C9EC42AEFC176E58AF3 /* Pods_MockServiceSwift_Example.framework */; };
 		CE742697FC418A04122664DB /* Pods_MockServiceSwift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 467534A084F2B35B892239E1 /* Pods_MockServiceSwift_Tests.framework */; };
 		D2A4FEDE270247F2003F3D90 /* MyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4FEDD270247F2003F3D90 /* MyNetwork.swift */; };
+		D2A4FEE027035F1E003F3D90 /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4FEDF27035F1E003F3D90 /* GithubAPI.swift */; };
+		D2A4FEE2270361F1003F3D90 /* MyMoyaExampleNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4FEE1270361F1003F3D90 /* MyMoyaExampleNetwork.swift */; };
+		D2A4FEE62703650C003F3D90 /* some_json_file.json in Resources */ = {isa = PBXBuildFile; fileRef = D2A4FEE52703650C003F3D90 /* some_json_file.json */; };
 		D2AADB5126FE65FE0073BC93 /* some_json_file_data_success_response.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */; };
 		D2AADB5226FE65FE0073BC93 /* FooAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */; };
 		D2AADB5326FE65FE0073BC93 /* BarAPI_somePost_Post_error.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */; };
@@ -54,6 +57,9 @@
 		C5970C660F9A5FDD97307A12 /* Pods-MockServiceSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MockServiceSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-MockServiceSwift_Example/Pods-MockServiceSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C7D83BB605AB5B4FECD82499 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D2A4FEDD270247F2003F3D90 /* MyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNetwork.swift; sourceTree = "<group>"; };
+		D2A4FEDF27035F1E003F3D90 /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
+		D2A4FEE1270361F1003F3D90 /* MyMoyaExampleNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMoyaExampleNetwork.swift; sourceTree = "<group>"; };
+		D2A4FEE52703650C003F3D90 /* some_json_file.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = some_json_file.json; sourceTree = "<group>"; };
 		D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = some_json_file_data_success_response.json; sourceTree = "<group>"; };
 		D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooAPI.swift; sourceTree = "<group>"; };
 		D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BarAPI_somePost_Post_error.json; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				D2A4FEDD270247F2003F3D90 /* MyNetwork.swift */,
+				D2A4FEE1270361F1003F3D90 /* MyMoyaExampleNetwork.swift */,
 			);
 			name = "Example for MockServiceSwift";
 			path = MockServiceSwift;
@@ -173,9 +180,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D2A4FEE3270364E3003F3D90 /* GithubAPI */ = {
+			isa = PBXGroup;
+			children = (
+				D2A4FEE4270364EF003F3D90 /* Mocks */,
+				D2A4FEDF27035F1E003F3D90 /* GithubAPI.swift */,
+			);
+			path = GithubAPI;
+			sourceTree = "<group>";
+		};
+		D2A4FEE4270364EF003F3D90 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				D2A4FEE52703650C003F3D90 /* some_json_file.json */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		D2AADB4526FE65FE0073BC93 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D2A4FEE3270364E3003F3D90 /* GithubAPI */,
 				D2AADB4626FE65FE0073BC93 /* FooAPI */,
 				D2AADB4B26FE65FE0073BC93 /* BarAPI */,
 			);
@@ -322,6 +347,7 @@
 			files = (
 				D2AADB5426FE65FE0073BC93 /* BarAPI_somePost_Post_success.json in Resources */,
 				D2AADB5126FE65FE0073BC93 /* some_json_file_data_success_response.json in Resources */,
+				D2A4FEE62703650C003F3D90 /* some_json_file.json in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -368,11 +394,17 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MockServiceSwift_Example/Pods-MockServiceSwift_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/MockServiceSwift/MockServiceSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MockServiceSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -409,9 +441,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2AADB5226FE65FE0073BC93 /* FooAPI.swift in Sources */,
+				D2A4FEE027035F1E003F3D90 /* GithubAPI.swift in Sources */,
 				D2A4FEDE270247F2003F3D90 /* MyNetwork.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				D2AADB5526FE65FE0073BC93 /* BarAPI.swift in Sources */,
+				D2A4FEE2270361F1003F3D90 /* MyMoyaExampleNetwork.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

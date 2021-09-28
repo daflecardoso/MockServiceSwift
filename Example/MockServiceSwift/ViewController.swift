@@ -8,6 +8,7 @@
 
 import UIKit
 import MockServiceSwift
+import Moya
 
 class ViewController: UIViewController {
     
@@ -17,7 +18,10 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Show mock area", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
+        button.layer.cornerRadius = 8
+        button.setTitleColor(.systemBlue.withAlphaComponent(0.6), for: .highlighted)
         button.addTarget(self, action: #selector(didTapShowButton), for: .touchUpInside)
         return button
     }()
@@ -26,7 +30,10 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Call API", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
+        button.layer.cornerRadius = 8
+        button.setTitleColor(.systemBlue.withAlphaComponent(0.6), for: .highlighted)
         button.addTarget(self, action: #selector(didTapCallAPI), for: .touchUpInside)
         return button
     }()
@@ -62,7 +69,8 @@ class ViewController: UIViewController {
     @objc private func didTapShowButton() {
         
         let apis = [
-            FooAPI.self
+            //  FooAPI.self,
+            GitHub.self
         ]
         
         let services = apis.map {
@@ -70,7 +78,8 @@ class ViewController: UIViewController {
                 title: String(describing: $0),
                 color: .systemBlue,
                 icon: UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
-                apis: $0.apis)
+                apis: $0.apis
+            )
         }
         
         let viewController = MockServices.shared
@@ -84,11 +93,28 @@ class ViewController: UIViewController {
     
     @objc private func didTapCallAPI() {
         
-        network.foo { [unowned self] response in
-            self.responseLabel.text = response
-            print(response)
-        } failure: { error in
-            print("some error")
+//        network.foo { [unowned self] response in
+//            self.responseLabel.text = response
+//            print(response)
+//        } failure: { error in
+//            print("some error")
+//        }
+        callAPI()
+    }
+    
+    @objc private func callAPI() {
+        
+        let service = MyMoyaExampleNetwork()
+        
+        service.gitHubUserProfile { event in
+            switch event {
+            case let .success(response):
+                let data = response.data
+                let json = String(data: data, encoding: .utf8) ?? "nil"
+                self.responseLabel.text = json
+            case let .failure(error):
+                print(error)
+            }
         }
     }
 }
