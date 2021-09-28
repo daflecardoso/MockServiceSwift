@@ -1,9 +1,11 @@
-# MockServiceSwift
+# MockServiceSwift 0.5.0
 
 [![CI Status](https://img.shields.io/travis/daflecardoso/MockServiceSwift.svg?style=flat)](https://travis-ci.org/daflecardoso/MockServiceSwift)
 [![Version](https://img.shields.io/cocoapods/v/MockServiceSwift.svg?style=flat)](https://cocoapods.org/pods/MockServiceSwift)
 [![License](https://img.shields.io/cocoapods/l/MockServiceSwift.svg?style=flat)](https://cocoapods.org/pods/MockServiceSwift)
 [![Platform](https://img.shields.io/cocoapods/p/MockServiceSwift.svg?style=flat)](https://cocoapods.org/pods/MockServiceSwift)
+
+Mock your apis without leaving your app. This simple library allows you to activate or change mocks api with ease, without having to mess with code, to facilitate your development and testing
 
 ## Example
 
