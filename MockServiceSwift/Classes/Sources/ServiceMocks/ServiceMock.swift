@@ -90,13 +90,16 @@ extension EndpointMock {
         set { MockServices.shared.defaults.set(newValue, forKey: "\(key).isEnabled") }
     }
     
-    public var json: String {
+    public var mockData: Data {
         let storeFileKey = "\(key).file"
         let storedFileName = MockServices.shared.defaults.string(forKey: storeFileKey)
         let currentMock = mocks.first(where: { $0.fileName == storedFileName })
         let fileName = (currentMock?.fileName ?? "")
-        let data = fileName.dataFromJsonFile
-        return String(data: data, encoding: .utf8) ?? ""
+        return fileName.dataFromJsonFile
+    }
+    
+    public var json: String {
+        return String(data: mockData, encoding: .utf8) ?? ""
     }
 }
 
