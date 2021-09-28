@@ -31,9 +31,9 @@ enum FooAPI {
     case someGet, somePost, somePut, someDelete
 }
 
-extension FooAPI: MockTargetEndpoint {
+extension FooAPI: EndpointMock {
     
-    static var cases: [MockTargetEndpoint] {
+    static var apis: [EndpointMock] {
         return [
             FooAPI.someGet,
             FooAPI.somePost,
@@ -55,15 +55,13 @@ extension FooAPI: MockTargetEndpoint {
         }
     }
     
-    var defaultMocks: [MockType] {
+    var mocks: [ResponseMock] {
         switch self {
         case .someGet:
             return [
-                .init(id: UUID().uuidString,
-                      isEnabled: true,
-                      name: "Success",
+                .init(name: "Success",
                       description: "Success response two itens",
-                      data: "some_json_file_data_success_response".jsonData)
+                      fileName: "some_json_file_data_success_response")
             ]
         case .somePost:
             return []
@@ -74,7 +72,7 @@ extension FooAPI: MockTargetEndpoint {
         }
     }
     
-    var requestMethod: String {
+    var mockMethod: String {
         switch self {
         case .someGet:
             return "GET"
@@ -87,7 +85,7 @@ extension FooAPI: MockTargetEndpoint {
         }
     }
     
-    var endpointPath: String {
+    var mockPath: String {
         switch self {
         case .someGet:
             return "/v1/some"
@@ -106,24 +104,26 @@ Then prensent mocks controller
 
 ```swift
 func showMocksArea() {
-  let viewController = MockServices.shared.makeMocksViewController(services: [
-            ServiceMockApis(
-                title: "fooAPI",
-                color: .red,
-                icon: UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
-                apis: FooAPI.cases
-            ),
-            ServiceMockApis(
-                title: "barAPI",
-                color: .blue,
-                icon:  UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
-                apis: []
-            )
-        ])
-        
-        let navigation = UINavigationController(rootViewController: viewController)
-        navigation.modalPresentationStyle = .overFullScreen
-        present(navigation, animated: true, completion: nil)
+    let apis = [
+        FooAPI.self
+    ]
+
+    let services = apis.map {
+        ServiceMockApis(
+            title: String(describing: $0),
+            color: .systemBlue,
+            icon: UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
+            apis: $0.apis
+        )
+    }
+
+    let viewController = MockServices.shared
+        .setStyle(MockServices.Style(tintColor: .systemBlue))
+        .services(services)
+        .makeMocksViewController()
+
+    let navigation = UINavigationController(rootViewController: viewController)
+    present(navigation, animated: true, completion: nil)
 }
 ```
 
