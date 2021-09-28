@@ -7,9 +7,12 @@
 
 ## Example
 
+<img src="../master/example.gif" alt="My cool logo" width="200px"/>
+
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+No requirements
 
 ## Installation
 
@@ -124,6 +127,165 @@ func showMocksArea() {
 
     let navigation = UINavigationController(rootViewController: viewController)
     present(navigation, animated: true, completion: nil)
+}
+```
+
+```swift
+
+//Helpers variables
+
+public protocol EndPointMock {
+    /**
+        Stored key mock
+     */
+    var key: String { get }
+
+    /**
+        Mock is enabled
+    */
+    var isEnabled: Bool { get }
+
+    /**
+        Data from file
+    */
+    var mockData: Data { get }
+
+    /**
+        String json from file
+    */
+    var json: String { get }
+}
+```
+
+## Using Moya Example
+If you are using moya is pretty easier
+
+```swift
+import Moya
+import MockServiceSwift
+
+enum GitHub {
+    case userProfile(String)
+}
+
+extension GitHub: TargetType {
+    
+    var baseURL: URL {
+        return URL(string: "https://api.github.com")!
+    }
+    
+    var path: String {
+        switch self {
+        case .userProfile:
+            return "/user"
+        }
+    }
+    
+    var method: Moya.Method {
+        switch self {
+        case .userProfile:
+            return .get
+        }
+    }
+    
+    var sampleData: Data {
+        return mockData
+    }
+    
+    var task: Task {
+        switch self {
+        case .userProfile:
+            return .requestPlain
+        }
+    }
+    
+    var headers: [String : String]? {
+        return nil
+    }
+}
+
+extension GitHub: EndpointMock {
+    
+    static var apis: [EndpointMock] {
+        return [
+            GitHub.userProfile("")
+        ]
+    }
+    
+    var description: String {
+        switch self {
+        case .userProfile:
+            return "Get user profile"
+        }
+    }
+    
+    var mockMethod: String {
+        return method.rawValue
+    }
+    
+    var mockPath: String {
+        return path
+    }
+    
+    var mocks: [ResponseMock] {
+        switch self {
+        case .userProfile:
+            return [
+                .init(
+                    name: "Success",
+                    description: "Get user profile success",
+                    fileName: "some_json_file"
+                )
+            ]
+        }
+    }
+}
+```
+
+## Create a service class, and Base Helper
+
+```swift
+import Moya
+import MockServiceSwift
+
+class BaseNetwork<Target: TargetType> {
+    let provider = MoyaProvider<Target>()
+    private let mockProvider = MoyaProvider<Target>(stubClosure: MoyaProvider.immediatelyStub(_:))
+    
+    internal func request(_ target: Target, completion: @escaping Moya.Completion) -> Cancellable {
+        if let targetMock = target as? EndpointMock, targetMock.isEnabled {
+            print("from mock...", targetMock.key)
+            return mockProvider.request(target, completion: completion)
+        }
+        return provider.request(target, completion: completion)
+    }
+}
+
+class MyMoyaExampleNetwork: BaseNetwork<GitHub> {
+    
+    func gitHubUserProfile(completion: @escaping Moya.Completion) -> Cancellable {
+        return super.request(.userProfile("ashfurrow"), completion: completion)
+    }
+}
+
+
+private func callAPI() {
+        
+    let service = MyMoyaExampleNetwork()
+
+    service.gitHubUserProfile { event in
+        switch event {
+        case let .success(response):
+            let data = response.data
+            let statusCode = response.statusCode
+            // do something with the response data or statusCode
+        case let .failure(error):
+            // this means there was a network failure - either the request
+            // wasn't sent (connectivity), or no response was received (server
+            // timed out).  If the server responds with a 4xx or 5xx error, that
+            // will be sent as a ".success"-ful response.
+        }
+    }
 }
 ```
 
