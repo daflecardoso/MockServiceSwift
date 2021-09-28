@@ -27,7 +27,7 @@ pod 'MockServiceSwift'
 
 ## Usage
 
-Implement ```MockTargetEndpoint``` in your api file
+Implement ```EndpointMock``` in your api file
 
 ```swift
 import MockServiceSwift
