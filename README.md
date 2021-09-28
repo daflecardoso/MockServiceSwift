@@ -105,7 +105,7 @@ extension FooAPI: EndpointMock {
 }
 ```
 
-Then prensent mocks controller
+Then present mocks controller
 
 ```swift
 func showMocksArea() {
@@ -160,7 +160,7 @@ public protocol EndPointMock {
 ```
 
 ## Using Moya Example
-If you are using moya is pretty easier
+If you are using ```Moya``` library is pretty easier
 
 ```swift
 import Moya
@@ -252,12 +252,12 @@ import MockServiceSwift
 
 class BaseNetwork<Target: TargetType> {
     let provider = MoyaProvider<Target>()
-    private let mockProvider = MoyaProvider<Target>(stubClosure: MoyaProvider.immediatelyStub(_:))
+    private let mock = MoyaProvider<Target>(stubClosure: MoyaProvider.immediatelyStub(_:))
     
     internal func request(_ target: Target, completion: @escaping Moya.Completion) -> Cancellable {
         if let targetMock = target as? EndpointMock, targetMock.isEnabled {
             print("from mock...", targetMock.key)
-            return mockProvider.request(target, completion: completion)
+            return mock.request(target, completion: completion)
         }
         return provider.request(target, completion: completion)
     }
