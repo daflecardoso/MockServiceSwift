@@ -70,18 +70,18 @@ extension FooAPI: EndpointMock {
         switch self {
         case .someGet:
             return [
-                .init(name: "Success",
-                      description: "Success response two itens",
-                      fileName: "some_json_file_data_success_response"),
-                .init(name: "Error",
-                      description: "Success response two itens",
-                      fileName: "some_json_file_data_success_response_none"),
-                .init(name: "Error2",
-                      description: "Success response two itens",
-                      fileName: "some_json_file_data_success_response_none2"),
-                .init(name: "Error3",
-                      description: "Success response two itens",
-                      fileName: "some_json_file_data_success_response_none3")
+                .init(description: "Success response two itens",
+                      fileName: "some_json_file_data_success_response",
+                      statusCode: 200),
+                .init(description: "Error 401",
+                      fileName: "some_json_file_data_success_response_none",
+                      statusCode: 401),
+                .init(description: "Error 400",
+                      fileName: "some_json_file_data_success_response_none2",
+                      statusCode: 400),
+                .init(description: "Error 500",
+                      fileName: "some_json_file_data_success_response_none3",
+                      statusCode: 500)
             ]
         case .somePost:
             return []

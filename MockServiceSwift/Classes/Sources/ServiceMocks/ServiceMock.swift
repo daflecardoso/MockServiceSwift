@@ -11,6 +11,20 @@ import UIKit
 
 public class MockServices {
     
+    static let bundle: Bundle = {
+        let bundleName = "Resources"
+        let bundle = Bundle(for: MockServices.self)
+        
+        guard let resourceBundleURL = bundle.url(forResource: bundleName, withExtension: "bundle") else { return Bundle.main
+        }
+        
+        guard let resourceBundle = Bundle(url: resourceBundleURL) else {
+            return Bundle.main
+        }
+        
+        return resourceBundle
+    }()
+    
     public static let shared = MockServices()
     
     public struct Style {
@@ -51,13 +65,11 @@ public class MockServices {
 
 public class ServiceMockApis {
     let title: String
-    let color: UIColor
     let icon: UIImage?
     let apis: [EndpointMock]
     
-    public init(title: String, color: UIColor, icon: UIImage?, apis: [EndpointMock]) {
+    public init(title: String, icon: UIImage?, apis: [EndpointMock]) {
         self.title = title
-        self.color = color
         self.icon = icon
         self.apis = apis
     }
@@ -94,12 +106,19 @@ extension EndpointMock {
         set { MockServices.shared.defaults.set(newValue, forKey: "\(key).isEnabled") }
     }
     
-    public var mockData: Data {
+    var currentMock: ResponseMock? {
         let storeFileKey = "\(key).file"
         let storedFileName = MockServices.shared.defaults.string(forKey: storeFileKey)
-        let currentMock = mocks.first(where: { $0.fileName == storedFileName })
-        let fileName = (currentMock?.fileName ?? "")
+        return mocks.first(where: { $0.fileName == storedFileName })
+    }
+    
+    public var mockData: Data {
+        let fileName = currentMock?.fileName ?? ""
         return fileName.dataFromJsonFile
+    }
+    
+    public var mockStatusCode: Int {
+        return currentMock?.statusCode ?? -1
     }
     
     public var json: String {
@@ -109,19 +128,15 @@ extension EndpointMock {
 
 public class ResponseMock: Codable {
     
-    public init(name: String,
-                description: String,
-                fileName: String) {
-        self.name = name
+    public init(description: String,
+                fileName: String,
+                statusCode: Int) {
         self.description = description
         self.fileName = fileName
+        self.statusCode = statusCode
     }
-    
-    public let name: String
+
     public let description: String
     public let fileName: String
-    
-    var isValid: Bool {
-        return !name.isEmpty
-    }
+    public let statusCode: Int
 }

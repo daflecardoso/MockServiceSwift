@@ -25,6 +25,7 @@ class BaseNetwork<Target: TargetType> {
 
 class MyMoyaExampleNetwork: BaseNetwork<GitHub> {
     
+    @discardableResult
     func gitHubUserProfile(completion: @escaping Moya.Completion) -> Cancellable {
         return super.request(.userProfile("ashfurrow"), completion: completion)
     }

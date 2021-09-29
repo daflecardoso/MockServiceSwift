@@ -45,6 +45,25 @@ extension UIColor {
         }
     }()
     
+    public static var cardColor: UIColor = {
+    
+        let light: UIColor = .white
+        
+        let dark = UIColor(red: 25/255, green: 26/255, blue: 27/255, alpha: 1.0)
+        
+        if #available(iOS 13, *) {
+            return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
+                if UITraitCollection.userInterfaceStyle == .dark {
+                    return dark
+                } else {
+                    return light
+                }
+            }
+        } else {
+            return light
+        }
+    }()
+    
     public static var whiteBlackNavigationTint: UIColor = {
         if #available(iOS 13, *) {
             return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in

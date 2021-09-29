@@ -47,7 +47,7 @@ class AddEditMockViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .backgroundContainerViews
-        navigationItem.titleView = UILabel.title(viewModel.mockItem.name)
+        navigationItem.titleView = UILabel.title(viewModel.mockItem.description)
     }
     
     private func setupConstraints() {

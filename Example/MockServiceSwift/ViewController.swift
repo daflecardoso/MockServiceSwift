@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.contentEdgeInsets = .init(top: 8, left: 8, bottom: 8, right: 8)
         button.layer.cornerRadius = 8
-        button.setTitleColor(.systemBlue.withAlphaComponent(0.6), for: .highlighted)
+        button.setTitleColor(.white.withAlphaComponent(0.6), for: .highlighted)
         button.addTarget(self, action: #selector(didTapShowButton), for: .touchUpInside)
         return button
     }()
@@ -68,15 +68,15 @@ class ViewController: UIViewController {
     
     @objc private func didTapShowButton() {
         
-        let apis = [
-            //  FooAPI.self,
-            GitHub.self
+        let apis: [EndpointMock.Type] = [
+            GitHub.self,
+            FooAPI.self,
+            BarAPI.self
         ]
         
         let services = apis.map {
             ServiceMockApis(
                 title: String(describing: $0),
-                color: .systemBlue,
                 icon: UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
                 apis: $0.apis
             )
