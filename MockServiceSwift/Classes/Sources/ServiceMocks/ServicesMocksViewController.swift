@@ -192,7 +192,7 @@ extension ServicesMocksViewController: UICollectionViewDelegate, UICollectionVie
             return footerView
             
         default:
-            assert(false, "Unexpected element kind")
+            return UICollectionReusableView()
         }
     }
     
