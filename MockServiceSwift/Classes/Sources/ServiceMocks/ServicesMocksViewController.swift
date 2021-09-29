@@ -167,33 +167,17 @@ extension ServicesMocksViewController: UICollectionViewDelegate, UICollectionVie
     public func collectionView(_ collectionView: UICollectionView,
                                viewForSupplementaryElementOfKind kind: String,
                                at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        switch kind {
-            
-        case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView
-                .dequeueReusableSupplementaryView(ofKind: kind,
-                                                  withReuseIdentifier: collectionViewHeader.className,
-                                                  for: indexPath) as! EndpointHeaderView
-            let item = viewModel.apis[indexPath.section]
-            headerView.set(with: item)
-            headerView.switchChanged = { [unowned self] in
-                self.viewModel.toggle(item: item, isOn: headerView.swt.isOn)
-                self.collectionView.reloadItems(at: [indexPath])
-            }
-            return headerView
-            
-        case UICollectionView.elementKindSectionFooter:
-            let footerView = collectionView
-                .dequeueReusableSupplementaryView(ofKind: kind,
-                                                  withReuseIdentifier: collectionViewHeader.className, for: indexPath)
-            
-            footerView.backgroundColor = UIColor.green
-            return footerView
-            
-        default:
-            return UICollectionReusableView()
+        let headerView = collectionView
+            .dequeueReusableSupplementaryView(ofKind: kind,
+                                              withReuseIdentifier: collectionViewHeader.className,
+                                              for: indexPath) as! EndpointHeaderView
+        let item = viewModel.apis[indexPath.section]
+        headerView.set(with: item)
+        headerView.switchChanged = { [unowned self] in
+            self.viewModel.toggle(item: item, isOn: headerView.swt.isOn)
+            self.collectionView.reloadItems(at: [indexPath])
         }
+        return headerView
     }
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
