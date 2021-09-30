@@ -1,4 +1,4 @@
-# MockServiceSwift 0.5.0
+# MockServiceSwift 0.7.0
 
 [![CI Status](https://img.shields.io/travis/daflecardoso/MockServiceSwift.svg?style=flat)](https://travis-ci.org/daflecardoso/MockServiceSwift)
 [![Version](https://img.shields.io/cocoapods/v/MockServiceSwift.svg?style=flat)](https://cocoapods.org/pods/MockServiceSwift)
@@ -9,7 +9,9 @@ Mock your apis without leaving your app. This simple library allows you to activ
 
 ## Example
 
-<img src="../master/example.gif" alt="My cool logo" width="200px"/>
+Light mode             |  Dark mode
+:-------------------------:|:-------------------------:
+<img src="../master/light_example.gif" alt="Light mode" width="200px"/>  |  <img src="../master/dark_example.gif" alt="Dark mode" width="200px"/>
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
@@ -60,23 +62,6 @@ extension FooAPI: EndpointMock {
         }
     }
     
-    var mocks: [ResponseMock] {
-        switch self {
-        case .someGet:
-            return [
-                .init(name: "Success",
-                      description: "Success response two itens",
-                      fileName: "some_json_file_data_success_response")
-            ]
-        case .somePost:
-            return []
-        case .somePut:
-            return []
-        case .someDelete:
-            return []
-        }
-    }
-    
     var mockMethod: String {
         switch self {
         case .someGet:
@@ -102,6 +87,21 @@ extension FooAPI: EndpointMock {
             return "/v1/delete/{some}"
         }
     }
+    
+    var mocks: [ResponseMock] {
+        switch self {
+        case .someGet:
+            return [
+                .init(description: "Success response two itens", fileName: "some_json_file_data_success_response", statusCode: 200)
+            ]
+        case .somePost:
+            return []
+        case .somePut:
+            return []
+        case .someDelete:
+            return []
+        }
+    }
 }
 ```
 
@@ -109,15 +109,14 @@ Then present mocks controller
 
 ```swift
 func showMocksArea() {
-    let apis = [
+    let apis: [EndpointMock.Type] = [
         FooAPI.self
     ]
 
     let services = apis.map {
         ServiceMockApis(
             title: String(describing: $0),
-            color: .systemBlue,
-            icon: UIImage(named: "ic_bug")?.withRenderingMode(.alwaysTemplate),
+            icon: nil,
             apis: $0.apis
         )
     }
@@ -233,11 +232,7 @@ extension GitHub: EndpointMock {
         switch self {
         case .userProfile:
             return [
-                .init(
-                    name: "Success",
-                    description: "Get user profile success",
-                    fileName: "some_json_file"
-                )
+                .init(description: "Get user profile success", fileName: "some_json_file", statusCode: 200)
             ]
         }
     }
