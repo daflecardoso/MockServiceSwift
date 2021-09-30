@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ServiceMockCell: UITableViewCell {
+class ServiceMockCell: UICollectionViewCell {
     
     private let defaultTintColor = MockServices.shared.style.tintColor
     
@@ -28,8 +28,17 @@ class ServiceMockCell: UITableViewCell {
         return label
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    private lazy var stackView = UIStackView(arrangedSubviews: [
+        iconImageView,
+        titleLabel
+    ]).apply {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .horizontal
+        $0.spacing = 4
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
         setup()
     }
     
@@ -50,17 +59,15 @@ class ServiceMockCell: UITableViewCell {
         selectedBackgroundView = selectedView
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        let textColor: UIColor = selected ? .white : defaultTintColor
-        iconImageView.tintColor = textColor
-        titleLabel.textColor = textColor
-        print(selected)
+    override var isSelected: Bool {
+        didSet {
+            setupColors()
+        }
     }
     
     private func setupConstraints() {
-        contentView.addSubview(iconImageView)
-        contentView.addSubview(titleLabel)
+        contentView.addSubview(stackView)
+       
         
         let imageHeight: CGFloat = 16
         
@@ -68,18 +75,24 @@ class ServiceMockCell: UITableViewCell {
             iconImageView.widthAnchor.constraint(equalToConstant: imageHeight),
             iconImageView.heightAnchor.constraint(equalToConstant: imageHeight),
             
-            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            iconImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).apply { $0.priority = .defaultLow },
-            
-            titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).apply { $0.priority = .defaultLow }
         ])
     }
     
-    func set(with item: ServiceMockApis) {
-        titleLabel.text = item.title
+    func set(with item: ServiceMockApis, index: Int) {
+        titleLabel.text = "\(index) - " + item.title
+        iconImageView.isHidden = item.icon == nil
         iconImageView.image = item.icon
+        setupColors()
+    }
+    
+    private func setupColors() {
+        let textColor: UIColor = isSelected ? .white : defaultTintColor
+        iconImageView.tintColor = textColor
+        titleLabel.textColor = textColor
+        // print("isSelected", isSelected)
     }
 }

@@ -45,6 +45,25 @@ extension UIColor {
         }
     }()
     
+    public static var arrowBackgroundColor: UIColor = {
+    
+        let light = UIColor(red: 249/255, green: 250/255, blue: 251/255, alpha: 1.0)
+        
+        let dark = UIColor(red: 33/255, green: 34/255, blue: 35/255, alpha: 1.0)
+        
+        if #available(iOS 13, *) {
+            return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
+                if UITraitCollection.userInterfaceStyle == .dark {
+                    return dark
+                } else {
+                    return light
+                }
+            }
+        } else {
+            return light
+        }
+    }()
+    
     public static var cardColor: UIColor = {
     
         let light: UIColor = .white

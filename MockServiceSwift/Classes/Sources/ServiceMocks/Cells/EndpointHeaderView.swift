@@ -11,6 +11,13 @@ class EndpointHeaderView: UICollectionReusableView {
     
     private let defaultTintColor = MockServices.shared.style.tintColor
     
+    private let methodLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .bold(12)
+        return label
+    }()
+    
     private let statusTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +35,14 @@ class EndpointHeaderView: UICollectionReusableView {
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            statusTitleLabel,
+            UIStackView(arrangedSubviews: [
+                methodLabel,
+                statusTitleLabel,
+                UIView()
+            ]).apply {
+                $0.axis = .horizontal
+                $0.spacing = 4
+            },
             pathLabel
         ])
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,11 +94,12 @@ class EndpointHeaderView: UICollectionReusableView {
     }
     
     func set(with item: EndpointMock) {
-        statusTitleLabel.text = "\(item.mockMethod) - \(item.description)"
+        methodLabel.text = item.mockMethod
+        methodLabel.textColor = item.methodColor
+        statusTitleLabel.text = item.description
         pathLabel.text = item.mockPath
         swt.isOn = item.isEnabled
     }
-    
     
     @objc private func didChangeSwitch() {
         switchChanged?()

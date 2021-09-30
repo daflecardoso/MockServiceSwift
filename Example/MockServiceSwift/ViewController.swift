@@ -70,7 +70,10 @@ class ViewController: UIViewController {
         
         let apis: [EndpointMock.Type] = [
             GitHub.self,
-            FooAPI.self,
+            FooBiggerNameToTestAPI.self,
+            BarAPI.self,
+            GitHub.self,
+            FooBiggerNameToTestAPI.self,
             BarAPI.self
         ]
         

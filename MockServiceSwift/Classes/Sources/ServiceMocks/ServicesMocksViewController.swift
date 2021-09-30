@@ -15,22 +15,20 @@ public class ServicesMocksViewController: UIViewController {
     
     private let viewModel: ServicesMocksViewModel
     
-    private let cell = ServiceMockCell.self
-    
     private let mockCell = MockCell.self
     
     private let collectionViewHeader = EndpointHeaderView.self
     
-    lazy var servicesTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(cell, forCellReuseIdentifier: cell.className)
-        tableView.backgroundColor = .clear
-        tableView.tableFooterView = UIView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        return tableView
+    private var indexPath = IndexPath(row: 0, section: 0)
+    
+    private lazy var tabView: ServiceTabsView = {
+        let view = ServiceTabsView(services: viewModel.services)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.didSelectMenu = { [unowned self] indexPath in
+            self.indexPath = indexPath
+            self.didSelectMenu(indexPath: indexPath)
+        }
+        return view
     }()
     
     private lazy var collectionView: UICollectionView = {
@@ -41,10 +39,10 @@ public class ServicesMocksViewController: UIViewController {
             layout.minimumInteritemSpacing = spacing
             layout.minimumLineSpacing = spacing
             layout.scrollDirection = .vertical
-            let width = UIScreen.main.bounds.width - 100
+            let width = UIScreen.main.bounds.width
             layout.headerReferenceSize = CGSize(width: width, height: 40)
             let screenWidth = width
-            let itemCount: CGFloat = 2
+            let itemCount: CGFloat = 3
             let inset = (spacing * (itemCount - 1))
             let totalMargins: CGFloat = ((itemCount - 1) * spacing) + (spacing * 2) + inset
             let screenWidthWithoutSpaces = screenWidth - totalMargins
@@ -87,9 +85,8 @@ public class ServicesMocksViewController: UIViewController {
     }
     
     private func selectRow(row: Int) {
-        let indexPath = IndexPath(row: 0, section: 0)
         didSelectMenu(indexPath: indexPath)
-        servicesTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        tabView.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
     }
     
     private func setup() {
@@ -103,19 +100,18 @@ public class ServicesMocksViewController: UIViewController {
     }
     
     private func setupTableView() {
-        view.addSubview(servicesTableView)
+        view.addSubview(tabView)
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            servicesTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            servicesTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            servicesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            servicesTableView.widthAnchor.constraint(equalToConstant: 100),
+            tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tabView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tabView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
-            collectionView.leadingAnchor.constraint(equalTo: servicesTableView.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: tabView.bottomAnchor, constant: 8),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: servicesTableView.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: servicesTableView.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
@@ -139,28 +135,6 @@ public class ServicesMocksViewController: UIViewController {
         print("\(self) deinitialized")
     }
 }
-
-extension ServicesMocksViewController: UITableViewDelegate {
-    
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        didSelectMenu(indexPath: indexPath)
-    }
-}
-
-extension ServicesMocksViewController: UITableViewDataSource {
-    
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.services.count
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = viewModel.services[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: cell.className, for: indexPath) as! ServiceMockCell
-        cell.set(with: item)
-        return cell
-    }
-}
-
 
 extension ServicesMocksViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -214,5 +188,11 @@ extension ServicesMocksViewController: UICollectionViewDelegate, UICollectionVie
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         collectionView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.selectRow(row: strongSelf.indexPath.row)
+        }
     }
 }

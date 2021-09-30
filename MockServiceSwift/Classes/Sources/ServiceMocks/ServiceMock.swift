@@ -124,6 +124,21 @@ extension EndpointMock {
     public var json: String {
         return String(data: mockData, encoding: .utf8) ?? ""
     }
+    
+    var methodColor: UIColor {
+        switch mockMethod {
+        case "GET":
+            return UIColor(red: 35/255, green: 168/255, blue: 84/255, alpha: 1.0)
+        case "POST":
+            return UIColor(red: 198/255, green: 142/255, blue: 45/255, alpha: 1.0)
+        case "PUT":
+            return UIColor(red: 8/255, green: 107/255, blue: 190/255, alpha: 1.0)
+        case "DELETE":
+            return UIColor(red: 208/255, green: 32/255, blue: 40/255, alpha: 1.0)
+        default:
+            return .black
+        }
+    }
 }
 
 public class ResponseMock: Codable {
@@ -134,6 +149,14 @@ public class ResponseMock: Codable {
         self.description = description
         self.fileName = fileName
         self.statusCode = statusCode
+    }
+    
+    var statusCodeColor: UIColor {
+        if (200...299).contains(statusCode) {
+            return UIColor(red: 35/255, green: 168/255, blue: 84/255, alpha: 1.0)
+        } else {
+            return UIColor(red: 208/255, green: 32/255, blue: 40/255, alpha: 1.0)
+        }
     }
 
     public let description: String

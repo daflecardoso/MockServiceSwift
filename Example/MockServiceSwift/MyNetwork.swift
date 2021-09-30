@@ -13,7 +13,7 @@ class MyNetwork {
     
     func foo(success: @escaping  (String) -> Void, failure: @escaping (Error) -> Void) {
         
-        let api = FooAPI.someGet
+        let api = FooBiggerNameToTestAPI.someGet
         
         if api.isEnabled {
             print("from mock...")

@@ -8,7 +8,7 @@
 import Foundation
 import MockServiceSwift
 
-enum FooAPI {
+enum FooBiggerNameToTestAPI {
     case someGet, somePost, somePut, someDelete
     
     var baseUrl: String {
@@ -16,14 +16,14 @@ enum FooAPI {
     }
 }
 
-extension FooAPI: EndpointMock {
+extension FooBiggerNameToTestAPI: EndpointMock {
     
     static var apis: [EndpointMock] {
         [
-            FooAPI.someGet,
-            FooAPI.somePost,
-            FooAPI.somePut,
-            FooAPI.someDelete
+            FooBiggerNameToTestAPI.someGet,
+            FooBiggerNameToTestAPI.somePost,
+            FooBiggerNameToTestAPI.somePut,
+            FooBiggerNameToTestAPI.someDelete
         ]
     }
     

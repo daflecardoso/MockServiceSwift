@@ -20,7 +20,7 @@
 		D2A4FEE2270361F1003F3D90 /* MyMoyaExampleNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4FEE1270361F1003F3D90 /* MyMoyaExampleNetwork.swift */; };
 		D2A4FEE62703650C003F3D90 /* some_json_file.json in Resources */ = {isa = PBXBuildFile; fileRef = D2A4FEE52703650C003F3D90 /* some_json_file.json */; };
 		D2AADB5126FE65FE0073BC93 /* some_json_file_data_success_response.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */; };
-		D2AADB5226FE65FE0073BC93 /* FooAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */; };
+		D2AADB5226FE65FE0073BC93 /* FooBiggerNameToTestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AADB4A26FE65FE0073BC93 /* FooBiggerNameToTestAPI.swift */; };
 		D2AADB5326FE65FE0073BC93 /* BarAPI_somePost_Post_error.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */; };
 		D2AADB5426FE65FE0073BC93 /* BarAPI_somePost_Post_success.json in Resources */ = {isa = PBXBuildFile; fileRef = D2AADB4F26FE65FE0073BC93 /* BarAPI_somePost_Post_success.json */; };
 		D2AADB5526FE65FE0073BC93 /* BarAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AADB5026FE65FE0073BC93 /* BarAPI.swift */; };
@@ -61,7 +61,7 @@
 		D2A4FEE1270361F1003F3D90 /* MyMoyaExampleNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMoyaExampleNetwork.swift; sourceTree = "<group>"; };
 		D2A4FEE52703650C003F3D90 /* some_json_file.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = some_json_file.json; sourceTree = "<group>"; };
 		D2AADB4926FE65FE0073BC93 /* some_json_file_data_success_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = some_json_file_data_success_response.json; sourceTree = "<group>"; };
-		D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooAPI.swift; sourceTree = "<group>"; };
+		D2AADB4A26FE65FE0073BC93 /* FooBiggerNameToTestAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooBiggerNameToTestAPI.swift; sourceTree = "<group>"; };
 		D2AADB4E26FE65FE0073BC93 /* BarAPI_somePost_Post_error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BarAPI_somePost_Post_error.json; sourceTree = "<group>"; };
 		D2AADB4F26FE65FE0073BC93 /* BarAPI_somePost_Post_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BarAPI_somePost_Post_success.json; sourceTree = "<group>"; };
 		D2AADB5026FE65FE0073BC93 /* BarAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarAPI.swift; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				D2AADB4726FE65FE0073BC93 /* Mocks */,
-				D2AADB4A26FE65FE0073BC93 /* FooAPI.swift */,
+				D2AADB4A26FE65FE0073BC93 /* FooBiggerNameToTestAPI.swift */,
 			);
 			path = FooAPI;
 			sourceTree = "<group>";
@@ -312,10 +312,12 @@
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Manual;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Manual;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -440,7 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2AADB5226FE65FE0073BC93 /* FooAPI.swift in Sources */,
+				D2AADB5226FE65FE0073BC93 /* FooBiggerNameToTestAPI.swift in Sources */,
 				D2A4FEE027035F1E003F3D90 /* GithubAPI.swift in Sources */,
 				D2A4FEDE270247F2003F3D90 /* MyNetwork.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
@@ -592,12 +594,15 @@
 			baseConfigurationReference = C5970C660F9A5FDD97307A12 /* Pods-MockServiceSwift_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MockServiceSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -608,12 +613,15 @@
 			baseConfigurationReference = 29631B64C5F0FE755D00054D /* Pods-MockServiceSwift_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MockServiceSwift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -623,6 +631,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 53AA9D6FF51D48511FC2908F /* Pods-MockServiceSwift_Tests.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -635,6 +645,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MockServiceSwift_Example.app/MockServiceSwift_Example";
@@ -645,6 +657,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BCC36560193E663E1906DDA /* Pods-MockServiceSwift_Tests.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -653,6 +667,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MockServiceSwift_Example.app/MockServiceSwift_Example";

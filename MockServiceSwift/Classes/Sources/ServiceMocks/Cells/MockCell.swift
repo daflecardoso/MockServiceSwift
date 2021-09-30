@@ -46,7 +46,6 @@ class MockCell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isUserInteractionEnabled = false
         button.tintColor = defaultTintColor
-        button.isHidden = true
         let radioWidth: CGFloat = 16
         button.widthAnchor.constraint(equalToConstant: radioWidth).isActive = true
         button.heightAnchor.constraint(equalToConstant: radioWidth).isActive = true
@@ -61,10 +60,12 @@ class MockCell: UICollectionViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(arrowImage, for: .normal)
-      //  button.tintColor = defaultTintColor
-        let radioWidth: CGFloat = 20
-        button.widthAnchor.constraint(equalToConstant: radioWidth).isActive = true
-        button.heightAnchor.constraint(equalToConstant: radioWidth).isActive = true
+        let buttonWidth: CGFloat = 30
+        button.layer.cornerRadius = buttonWidth / 2
+        button.backgroundColor = .arrowBackgroundColor
+        button.imageEdgeInsets = .init(top: 4, left: 4, bottom: 4, right: 4)
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.addTarget(self, action: #selector(didTapArrowButton), for: .touchUpInside)
         return button
     }()
@@ -73,8 +74,17 @@ class MockCell: UICollectionViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .cardColor
+        view.isUserInteractionEnabled = true
+        let twoTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTwoTimesCardView))
+        twoTapGesture.numberOfTapsRequired = 2
+        twoTapGesture.numberOfTouchesRequired = 2
+        view.addGestureRecognizer(twoTapGesture)
         return view
     }()
+    
+    @objc private func didTapTwoTimesCardView() {
+        seeDetailsTapped?()
+    }
     
     var seeDetailsTapped: (() -> Void)?
 
@@ -123,6 +133,7 @@ class MockCell: UICollectionViewCell {
     
     func set(with mock: ResponseMock) {
         statusCodeLabel.text = String(mock.statusCode)
+        statusCodeLabel.textColor = mock.statusCodeColor
         descriptionLabel.text = mock.description
     }
     
