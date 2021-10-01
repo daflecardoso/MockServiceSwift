@@ -37,21 +37,10 @@ class MockCell: UICollectionViewCell {
         ])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 6
+        stackView.spacing = 8
         return stackView
     }()
-    
-//    lazy var radioButton: RadioButton = {
-//        let button = RadioButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.isUserInteractionEnabled = false
-//        button.tintColor = defaultTintColor
-//        let radioWidth: CGFloat = 14
-//        button.widthAnchor.constraint(equalToConstant: radioWidth).isActive = true
-//        button.heightAnchor.constraint(equalToConstant: radioWidth).isActive = true
-//        return button
-//    }()
-    
+        
     var arrowImage: UIImage? {
         return UIImage(named: "ic_arrow_right", in: MockServices.bundle, compatibleWith: nil)
     }
@@ -74,11 +63,6 @@ class MockCell: UICollectionViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .cardColor
-        view.isUserInteractionEnabled = true
-        let twoTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTwoTimesCardView))
-        twoTapGesture.numberOfTapsRequired = 2
-        twoTapGesture.numberOfTouchesRequired = 2
-        view.addGestureRecognizer(twoTapGesture)
         return view
     }()
     
@@ -121,7 +105,7 @@ class MockCell: UICollectionViewCell {
             stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
             stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             stackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
-            stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4),
+            stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             
             arrowButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
             arrowButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),

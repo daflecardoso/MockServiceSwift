@@ -1,4 +1,4 @@
-# MockServiceSwift 0.8.0
+# MockServiceSwift 1.0.0
 
 [![CI Status](https://img.shields.io/travis/daflecardoso/MockServiceSwift.svg?style=flat)](https://travis-ci.org/daflecardoso/MockServiceSwift)
 [![Version](https://img.shields.io/cocoapods/v/MockServiceSwift.svg?style=flat)](https://cocoapods.org/pods/MockServiceSwift)
