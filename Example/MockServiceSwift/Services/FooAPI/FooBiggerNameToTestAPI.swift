@@ -70,7 +70,7 @@ extension FooBiggerNameToTestAPI: EndpointMock {
         switch self {
         case .someGet:
             return [
-                .init(description: "Success response two itens",
+                .init(description: "Success response two itens e aqui vai um texto grande para ver como o layout vai se comportar",
                       fileName: "some_json_file_data_success_response",
                       statusCode: 200),
                 .init(description: "Error 401",

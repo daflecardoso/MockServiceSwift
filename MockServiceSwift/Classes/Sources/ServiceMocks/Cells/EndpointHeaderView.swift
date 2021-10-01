@@ -28,7 +28,7 @@ class EndpointHeaderView: UICollectionReusableView {
     private let pathLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .medium(10)
+        label.font = .medium(12)
         label.textColor = .warmGrey
         return label
     }()

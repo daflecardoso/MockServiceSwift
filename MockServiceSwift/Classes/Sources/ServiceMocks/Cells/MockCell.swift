@@ -13,44 +13,44 @@ class MockCell: UICollectionViewCell {
     private let defaultTintColor = MockServices.shared.style.tintColor
     private let margin: CGFloat = 16
     
-    private let statusCodeLabel: UILabel = {
+    let statusCodeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .bold(14)
-        label.numberOfLines = 0
+        label.font = .bold(12)
         return label
     }()
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .medium(12)
+        label.font = .medium(10)
         label.textColor = .warmGrey
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         return label
     }()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             statusCodeLabel,
-            descriptionLabel
+            descriptionLabel,
+            UIView()
         ])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 4
+        stackView.spacing = 6
         return stackView
     }()
     
-    lazy var radioButton: RadioButton = {
-        let button = RadioButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.isUserInteractionEnabled = false
-        button.tintColor = defaultTintColor
-        let radioWidth: CGFloat = 16
-        button.widthAnchor.constraint(equalToConstant: radioWidth).isActive = true
-        button.heightAnchor.constraint(equalToConstant: radioWidth).isActive = true
-        return button
-    }()
+//    lazy var radioButton: RadioButton = {
+//        let button = RadioButton()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.isUserInteractionEnabled = false
+//        button.tintColor = defaultTintColor
+//        let radioWidth: CGFloat = 14
+//        button.widthAnchor.constraint(equalToConstant: radioWidth).isActive = true
+//        button.heightAnchor.constraint(equalToConstant: radioWidth).isActive = true
+//        return button
+//    }()
     
     var arrowImage: UIImage? {
         return UIImage(named: "ic_arrow_right", in: MockServices.bundle, compatibleWith: nil)
@@ -60,7 +60,7 @@ class MockCell: UICollectionViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(arrowImage, for: .normal)
-        let buttonWidth: CGFloat = 30
+        let buttonWidth: CGFloat = 26
         button.layer.cornerRadius = buttonWidth / 2
         button.backgroundColor = .arrowBackgroundColor
         button.imageEdgeInsets = .init(top: 4, left: 4, bottom: 4, right: 4)
@@ -109,7 +109,7 @@ class MockCell: UICollectionViewCell {
     private func setupConstraints() {
         contentView.addSubview(containerView)
         containerView.addSubview(stackView)
-        containerView.addSubview(radioButton)
+      //  containerView.addSubview(radioButton)
         containerView.addSubview(arrowButton)
         
         NSLayoutConstraint.activate([
@@ -121,13 +121,10 @@ class MockCell: UICollectionViewCell {
             stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
             stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             stackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
-           // stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
+            stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4),
             
-            radioButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
-            radioButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
-            
+            arrowButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
             arrowButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
-            arrowButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
         ])
     }
     

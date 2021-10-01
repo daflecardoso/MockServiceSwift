@@ -45,7 +45,7 @@ public class ServicesMocksViewController: BaseViewController {
             let screenWidth = width
             let itemCount: CGFloat = 3
             let inset = (spacing * (itemCount - 1))
-            let totalMargins: CGFloat = ((itemCount - 1) * spacing) + (spacing * 2) + inset
+            let totalMargins: CGFloat = ((itemCount - 1) * spacing) + (spacing * 2)
             let screenWidthWithoutSpaces = screenWidth - totalMargins
             let itemWidth: CGFloat = screenWidthWithoutSpaces / itemCount
             let itemSize = CGSize(width: itemWidth, height: 100)
@@ -174,7 +174,7 @@ extension ServicesMocksViewController: UICollectionViewDelegate, UICollectionVie
         let color: UIColor = isSelected ? defaultTintColor : .headerNavigationTint
         let shadowColor: UIColor = isSelected ? defaultTintColor : .gray
         cell.set(with: item)
-        cell.radioButton.isChecked = isSelected
+       // cell.radioButton.isChecked = isSelected
         cell.containerView.setupShadowBorder(borderColor: color, shadowColor: shadowColor)
         cell.seeDetailsTapped = { [unowned self] in
             self.navigateToDetails(endpoint: endpoint, mock: item)
