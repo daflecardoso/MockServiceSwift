@@ -11,6 +11,8 @@ import UIKit
 
 public class MockServices {
     
+    private let latestKey = "MockServices.Latest"
+    
     static let bundle: Bundle = {
         let bundleName = "Resources"
         let bundle = Bundle(for: MockServices.self)
@@ -60,6 +62,15 @@ public class MockServices {
     public func makeMocksViewController() -> ServicesMocksViewController {
         let viewModel = ServicesMocksViewModel(items: services)
         return ServicesMocksViewController(viewModel: viewModel)
+    }
+    
+    func saveLatestViewed(row: Int) {
+        defaults.set(row, forKey: latestKey)
+    }
+    
+    func getLatest() -> IndexPath {
+        let row = defaults.integer(forKey: latestKey)
+        return IndexPath(row: row, section: 0)
     }
 }
 

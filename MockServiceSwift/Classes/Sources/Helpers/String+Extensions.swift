@@ -57,23 +57,32 @@ extension String {
         let nullColor: UIColor
         let numberColor: UIColor
         let boolColor: UIColor
+        let font: UIFont
         
-        static var `default`: JsonAttributedTheme {
-            return .init(stringColor: UIColor(red: 254/255, green: 129/255, blue: 115/255, alpha: 1.0),
-                         keyJsonColor: UIColor(red: 150/255, green: 136/255, blue: 248/255, alpha: 1.0),
-                         nullColor: UIColor(red: 252/255, green: 122/255, blue: 175/255, alpha: 1.0),
-                         numberColor: UIColor(red: 216/255, green: 198/255, blue: 129/255, alpha: 1.0),
-                         boolColor: UIColor(red: 216/255, green: 187/255, blue: 252/255, alpha: 1.0))
+        internal init(
+            stringColor: UIColor = UIColor(red: 254/255, green: 129/255, blue: 115/255, alpha: 1.0),
+            keyJsonColor: UIColor = UIColor(red: 150/255, green: 136/255, blue: 248/255, alpha: 1.0),
+            nullColor: UIColor = UIColor(red: 252/255, green: 122/255, blue: 175/255, alpha: 1.0),
+            numberColor: UIColor = UIColor(red: 216/255, green: 198/255, blue: 129/255, alpha: 1.0),
+            boolColor: UIColor = UIColor(red: 216/255, green: 187/255, blue: 252/255, alpha: 1.0),
+            font: UIFont = .regularMenlo(14)
+        ) {
+            self.stringColor = stringColor
+            self.keyJsonColor = keyJsonColor
+            self.nullColor = nullColor
+            self.numberColor = numberColor
+            self.boolColor = boolColor
+            self.font = font
         }
     }
     
-    func makeJsonAttributed(theme: JsonAttributedTheme = .default) -> NSMutableAttributedString {
+    func makeJsonAttributed(theme: JsonAttributedTheme = JsonAttributedTheme()) -> NSMutableAttributedString {
         let final = NSMutableAttributedString(string: "")
         
         self.components(separatedBy: "\n").forEach { pieceJson in
             
             let keyJsonGroups = pieceJson.matches(for: "\"[A-z0-9-]{1,}\"\\s:\\s")
-            let nullGroups = pieceJson.capturedGroups(withRegex: "(null,)")
+            let nullGroups = pieceJson.capturedGroups(withRegex: "(null,|null)")
             let numberGroups = pieceJson.capturedGroups(withRegex: "([0-9.]{1,},)")
             let stringGroups = pieceJson
                 .capturedGroups(withRegex: "(\\s\"[A-ú0-9!@#$%^&*()=\\s+\\-,.?\"://{}|<>]{1,}\")")
@@ -81,7 +90,7 @@ extension String {
             
             let attributedString = NSMutableAttributedString(string: pieceJson, attributes: [
                 .foregroundColor: UIColor.whiteBlackNavigationTint,
-                .font: UIFont.regular(16)
+                .font: theme.font
             ])
             stringGroups.forEach { text in
                 let range = (pieceJson as NSString).range(of: text)

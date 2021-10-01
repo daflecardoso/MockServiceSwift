@@ -20,9 +20,13 @@ class AddEditMockViewModel {
         self.mockItem = mock
     }
     
-    var attributedJson: NSAttributedString {
-        let prettyPrinted = mockItem.fileName.dataFromJsonFile.prettyPrintedJSONString as String?
-        let json = prettyPrinted ?? ""
-        return json.makeJsonAttributed()
+    lazy var json = mockItem.fileName.dataFromJsonFile.prettyPrintedJSONString ?? ""
+    
+    var lines: String {
+        var text = ""
+        json.components(separatedBy: "\n").enumerated().forEach { index, _ in
+            text.append("\(index + 1)\n")
+        }
+        return text
     }
 }

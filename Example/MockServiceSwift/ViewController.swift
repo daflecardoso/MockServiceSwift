@@ -91,6 +91,7 @@ class ViewController: UIViewController {
             .makeMocksViewController()
         
         let navigation = UINavigationController(rootViewController: viewController)
+        //navigation.modalPresentationStyle = .overFullScreen
         present(navigation, animated: true, completion: nil)
     }
     

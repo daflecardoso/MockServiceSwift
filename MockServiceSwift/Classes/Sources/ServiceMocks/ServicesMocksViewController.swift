@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class ServicesMocksViewController: UIViewController {
+public class ServicesMocksViewController: BaseViewController {
     
     private let defaultTintColor = MockServices.shared.style.tintColor
     
@@ -19,13 +19,14 @@ public class ServicesMocksViewController: UIViewController {
     
     private let collectionViewHeader = EndpointHeaderView.self
     
-    private var indexPath = IndexPath(row: 0, section: 0)
+    private var indexPath = MockServices.shared.getLatest()
     
     private lazy var tabView: ServiceTabsView = {
         let view = ServiceTabsView(services: viewModel.services)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.didSelectMenu = { [unowned self] indexPath in
             self.indexPath = indexPath
+            MockServices.shared.saveLatestViewed(row: indexPath.row)
             self.didSelectMenu(indexPath: indexPath)
         }
         return view
@@ -81,12 +82,14 @@ public class ServicesMocksViewController: UIViewController {
         super.viewDidLoad()
         setup()
         
-        selectRow(row: 0)
+        selectRow(row: indexPath.row)
     }
     
     private func selectRow(row: Int) {
-        didSelectMenu(indexPath: indexPath)
-        tabView.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+        if viewModel.services.count > row {
+            didSelectMenu(indexPath: indexPath)
+            tabView.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        }
     }
     
     private func setup() {

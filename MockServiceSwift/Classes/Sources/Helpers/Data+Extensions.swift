@@ -18,11 +18,25 @@ extension Data {
         }
     }
     
-    var prettyPrintedJSONString: NSString? { /// NSString gives us a nice sanitized debugDescription
-        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
-              let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
-              let prettyPrintedString
-                = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else { return nil }
+    var prettyPrintedJSONString: String? {
+        let options: JSONSerialization.WritingOptions
+        if #available(iOS 13.0, *) {
+            options = [.prettyPrinted, .withoutEscapingSlashes]
+        } else {
+            options = [.prettyPrinted]
+        }
+        
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []) else {
+            return nil
+        }
+        
+        guard let data = try? JSONSerialization.data(withJSONObject: object, options: options) else {
+            return nil
+        }
+        
+        guard let prettyPrintedString = String(data: data, encoding: .utf8) else {
+            return nil
+        }
 
         return prettyPrintedString
     }

@@ -1,4 +1,436 @@
 {
-    "name": "steve jobs",
-    "anything": "some data"
+    "productId": "2174268",
+    "productName": "Cápsula Chá de Erva Doce TRES 3 Corações",
+    "brand": "2k games",
+    "brandId": 1,
+    "brandImageUrl": null,
+    "linkText": "capsula-cha-de-erva-doce-tres-3-coracoes-2174268",
+    "productReference": "7896005805053",
+    "productReferenceCode": null,
+    "categoryId": "8",
+    "productTitle": null,
+    "releaseDate": "2021-02-02T00:00:00",
+    "clusterHighlights": {},
+    "productClusters": {
+        "140": "Teste App 2"
+    },
+    "searchableClusters": {},
+    "categories": [
+        "/Vestuário/Masculino/",
+        "/Vestuário/"
+    ],
+    "categoriesIds": [
+        "/5/8/",
+        "/5/"
+    ],
+    "link": "https://cooperadev.vtexcommercestable.com.br/capsula-cha-de-erva-doce-tres-3-coracoes-2174268/p",
+    "description": "some",
+    "items": [
+        {
+            "itemId": "255",
+            "name": "10 Cápsulas",
+            "nameComplete": "Cápsula Chá de Erva Doce TRES 3 Corações 10 Cápsulas",
+            "complementName": "",
+            "ean": "7896005805053",
+            "referenceId": [
+                {
+                    "Key": "RefId",
+                    "Value": "2187093|00|3|"
+                }
+            ],
+            "measurementUnit": "un",
+            "unitMultiplier": 1,
+            "modalType": null,
+            "isKit": false,
+            "images": [
+                {
+                    "imageId": "161677",
+                    "imageLabel": "2187093|218709300.jpg",
+                    "imageTag": "<img src=\"~/arquivos/ids/161677-#width#-#height#/2187093|218709300.jpg?v=637478819001870000\" width=\"#width#\" height=\"#height#\" alt=\"\" id=\"\" />",
+                    "imageUrl": "https://i.pinimg.com/originals/3d/15/ce/3d15cec84bba9a2cb4b1c7a241a46641.jpg",
+                    "imageText": null,
+                    "imageLastModified": "2021-02-02T16:58:20.1870000Z"
+                },
+                {
+                    "imageId": "161678",
+                    "imageLabel": "2187093|218709300a.jpg",
+                    "imageTag": "<img src=\"~/arquivos/ids/161678-#width#-#height#/2187093|218709300a.jpg?v=637478819002800000\" width=\"#width#\" height=\"#height#\" alt=\"\" id=\"\" />",
+                    "imageUrl": "https://jbchost.com.br/ht/wp-content/uploads/2017/10/costeladesossada-800x484.jpg",
+                    "imageText": null,
+                    "imageLastModified": "2021-02-02T16:58:20.2800000Z"
+                },
+                {
+                    "imageId": "161679",
+                    "imageLabel": "2187093|218709300b.jpg",
+                    "imageTag": "<img src=\"~/arquivos/ids/161679-#width#-#height#/2187093|218709300b.jpg?v=637478819007930000\" width=\"#width#\" height=\"#height#\" alt=\"\" id=\"\" />",
+                    "imageUrl": "https://www.sociedadedacarne.com.br/blog/wp-content/uploads/2017/03/cortes-carne-supremos-conheca-famosa-carne-wagyu.jpg",
+                    "imageText": null,
+                    "imageLastModified": "2021-02-02T16:58:20.7930000Z"
+                }
+            ],
+            "sellers": [
+                {
+                    "sellerId": "magaluteste",
+                    "sellerName": "magaluteste",
+                    "addToCartLink": "https://cooperadev.vtexcommercestable.com.br/checkout/cart/add?sku=255&qty=1&seller=magaluteste&sc=1&price=1990&cv=8E5A194A195B6E428DFE3CB7DE9CE87B_&sc=1",
+                    "sellerDefault": true,
+                    "commertialOffer": {
+                        "DeliverySlaSamplesPerRegion": {
+                            "0": {
+                                "DeliverySlaPerTypes": [
+                                    {
+                                        "TypeName": "Normal",
+                                        "Price": 0,
+                                        "EstimatedTimeSpanToDelivery": "00:00:00"
+                                    }
+                                ],
+                                "Region": null
+                            }
+                        },
+                        "Installments": [
+                            {
+                                "Value": 19.9,
+                                "InterestRate": 0,
+                                "TotalValuePlusInterestRate": 19.9,
+                                "NumberOfInstallments": 1,
+                                "PaymentSystemName": "American Express",
+                                "PaymentSystemGroupName": "creditCardPaymentGroup",
+                                "Name": "American Express à vista"
+                            },
+                            {
+                                "Value": 19.9,
+                                "InterestRate": null,
+                                "TotalValuePlusInterestRate": 19.9,
+                                "NumberOfInstallments": 1,
+                                "PaymentSystemName": "Visa",
+                                "PaymentSystemGroupName": "creditCardPaymentGroup",
+                                "Name": "Visa"
+                            },
+                            {
+                                "Value": 19.9,
+                                "InterestRate": null,
+                                "TotalValuePlusInterestRate": 19.9,
+                                "NumberOfInstallments": 1,
+                                "PaymentSystemName": "Mastercard",
+                                "PaymentSystemGroupName": "creditCardPaymentGroup",
+                                "Name": "Mastercard"
+                            },
+                            {
+                                "Value": 19.9,
+                                "InterestRate": 0,
+                                "TotalValuePlusInterestRate": 19.9,
+                                "NumberOfInstallments": 1,
+                                "PaymentSystemName": "Boleto Bancário",
+                                "PaymentSystemGroupName": "bankInvoicePaymentGroup",
+                                "Name": "Boleto Bancário à vista"
+                            },
+                            {
+                                "Value": 19.9,
+                                "InterestRate": 0,
+                                "TotalValuePlusInterestRate": 19.9,
+                                "NumberOfInstallments": 1,
+                                "PaymentSystemName": "Vale",
+                                "PaymentSystemGroupName": "giftCardPaymentGroup",
+                                "Name": "Vale à vista"
+                            },
+                            {
+                                "Value": 19.9,
+                                "InterestRate": 0,
+                                "TotalValuePlusInterestRate": 19.9,
+                                "NumberOfInstallments": 1,
+                                "PaymentSystemName": "Teste promissória",
+                                "PaymentSystemGroupName": "custom201PaymentGroupPaymentGroup",
+                                "Name": "Teste promissória à vista"
+                            }
+                        ],
+                        "DiscountHighLight": [],
+                        "GiftSkuIds": [],
+                        "Teasers": [],
+                        "BuyTogether": [],
+                        "ItemMetadataAttachment": [],
+                        "Price": 19.9,
+                        "ListPrice": 19.9,
+                        "PriceWithoutDiscount": 19.9,
+                        "RewardValue": 0,
+                        "PriceValidUntil": null,
+                        "AvailableQuantity": 100,
+                        "IsAvailable": true,
+                        "Tax": 0,
+                        "SaleChannel": 0,
+                        "DeliverySlaSamples": [
+                            {
+                                "DeliverySlaPerTypes": [
+                                    {
+                                        "TypeName": "Normal",
+                                        "Price": 0,
+                                        "EstimatedTimeSpanToDelivery": "00:00:00"
+                                    }
+                                ],
+                                "Region": null
+                            }
+                        ],
+                        "GetInfoErrorMessage": null,
+                        "CacheVersionUsedToCallCheckout": "8E5A194A195B6E428DFE3CB7DE9CE87B_",
+                        "PaymentOptions": {
+                            "installmentOptions": [
+                                {
+                                    "paymentSystem": "1",
+                                    "bin": null,
+                                    "paymentName": "American Express",
+                                    "paymentGroupName": "creditCardPaymentGroup",
+                                    "value": 1990,
+                                    "installments": [
+                                        {
+                                            "count": 1,
+                                            "hasInterestRate": false,
+                                            "interestRate": 0,
+                                            "value": 1990,
+                                            "total": 1990,
+                                            "sellerMerchantInstallments": [
+                                                {
+                                                    "id": "COOPERADEV",
+                                                    "count": 1,
+                                                    "hasInterestRate": false,
+                                                    "interestRate": 0,
+                                                    "value": 1990,
+                                                    "total": 1990
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "paymentSystem": "2",
+                                    "bin": null,
+                                    "paymentName": "Visa",
+                                    "paymentGroupName": "creditCardPaymentGroup",
+                                    "value": 1990,
+                                    "installments": [
+                                        {
+                                            "count": 1,
+                                            "hasInterestRate": null,
+                                            "interestRate": null,
+                                            "value": 1990,
+                                            "total": 1990,
+                                            "sellerMerchantInstallments": [
+                                                {
+                                                    "id": "COOPERADEV",
+                                                    "count": 1,
+                                                    "hasInterestRate": null,
+                                                    "interestRate": null,
+                                                    "value": 1990,
+                                                    "total": 1990
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "paymentSystem": "4",
+                                    "bin": null,
+                                    "paymentName": "Mastercard",
+                                    "paymentGroupName": "creditCardPaymentGroup",
+                                    "value": 1990,
+                                    "installments": [
+                                        {
+                                            "count": 1,
+                                            "hasInterestRate": null,
+                                            "interestRate": null,
+                                            "value": 1990,
+                                            "total": 1990,
+                                            "sellerMerchantInstallments": [
+                                                {
+                                                    "id": "COOPERADEV",
+                                                    "count": 1,
+                                                    "hasInterestRate": null,
+                                                    "interestRate": null,
+                                                    "value": 1990,
+                                                    "total": 1990
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "paymentSystem": "6",
+                                    "bin": null,
+                                    "paymentName": "Boleto Bancário",
+                                    "paymentGroupName": "bankInvoicePaymentGroup",
+                                    "value": 1990,
+                                    "installments": [
+                                        {
+                                            "count": 1,
+                                            "hasInterestRate": false,
+                                            "interestRate": 0,
+                                            "value": 1990,
+                                            "total": 1990,
+                                            "sellerMerchantInstallments": [
+                                                {
+                                                    "id": "COOPERADEV",
+                                                    "count": 1,
+                                                    "hasInterestRate": false,
+                                                    "interestRate": 0,
+                                                    "value": 1990,
+                                                    "total": 1990
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "paymentSystem": "16",
+                                    "bin": null,
+                                    "paymentName": "Vale",
+                                    "paymentGroupName": "giftCardPaymentGroup",
+                                    "value": 1990,
+                                    "installments": [
+                                        {
+                                            "count": 1,
+                                            "hasInterestRate": false,
+                                            "interestRate": 0,
+                                            "value": 1990,
+                                            "total": 1990,
+                                            "sellerMerchantInstallments": [
+                                                {
+                                                    "id": "COOPERADEV",
+                                                    "count": 1,
+                                                    "hasInterestRate": false,
+                                                    "interestRate": 0,
+                                                    "value": 1990,
+                                                    "total": 1990
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "paymentSystem": "201",
+                                    "bin": null,
+                                    "paymentName": "Teste promissória",
+                                    "paymentGroupName": "custom201PaymentGroupPaymentGroup",
+                                    "value": 1990,
+                                    "installments": [
+                                        {
+                                            "count": 1,
+                                            "hasInterestRate": false,
+                                            "interestRate": 0,
+                                            "value": 1990,
+                                            "total": 1990,
+                                            "sellerMerchantInstallments": [
+                                                {
+                                                    "id": "COOPERADEV",
+                                                    "count": 1,
+                                                    "hasInterestRate": false,
+                                                    "interestRate": 0,
+                                                    "value": 1990,
+                                                    "total": 1990
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "paymentSystems": [
+                                {
+                                    "id": 4,
+                                    "name": "Mastercard",
+                                    "groupName": "creditCardPaymentGroup",
+                                    "validator": null,
+                                    "stringId": "4",
+                                    "template": "creditCardPaymentGroup-template",
+                                    "requiresDocument": false,
+                                    "isCustom": false,
+                                    "description": null,
+                                    "requiresAuthentication": false,
+                                    "dueDate": "2021-09-28T14:11:42.5154946Z",
+                                    "availablePayments": null
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Visa",
+                                    "groupName": "creditCardPaymentGroup",
+                                    "validator": null,
+                                    "stringId": "2",
+                                    "template": "creditCardPaymentGroup-template",
+                                    "requiresDocument": false,
+                                    "isCustom": false,
+                                    "description": null,
+                                    "requiresAuthentication": false,
+                                    "dueDate": "2021-09-28T14:11:42.5154946Z",
+                                    "availablePayments": null
+                                },
+                                {
+                                    "id": 201,
+                                    "name": "Teste promissória",
+                                    "groupName": "custom201PaymentGroupPaymentGroup",
+                                    "validator": null,
+                                    "stringId": "201",
+                                    "template": "custom201PaymentGroupPaymentGroup-template",
+                                    "requiresDocument": false,
+                                    "isCustom": true,
+                                    "description": "Teste promissória",
+                                    "requiresAuthentication": false,
+                                    "dueDate": "2021-09-28T14:12:42.5154946Z",
+                                    "availablePayments": null
+                                },
+                                {
+                                    "id": 1,
+                                    "name": "American Express",
+                                    "groupName": "creditCardPaymentGroup",
+                                    "validator": null,
+                                    "stringId": "1",
+                                    "template": "creditCardPaymentGroup-template",
+                                    "requiresDocument": false,
+                                    "isCustom": false,
+                                    "description": null,
+                                    "requiresAuthentication": false,
+                                    "dueDate": "2021-09-28T14:11:42.5154946Z",
+                                    "availablePayments": null
+                                },
+                                {
+                                    "id": 16,
+                                    "name": "Vale",
+                                    "groupName": "giftCardPaymentGroup",
+                                    "validator": null,
+                                    "stringId": "16",
+                                    "template": "giftCardPaymentGroup-template",
+                                    "requiresDocument": true,
+                                    "isCustom": false,
+                                    "description": null,
+                                    "requiresAuthentication": false,
+                                    "dueDate": "2021-09-28T14:11:42.5154946Z",
+                                    "availablePayments": null
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "Boleto Bancário",
+                                    "groupName": "bankInvoicePaymentGroup",
+                                    "validator": null,
+                                    "stringId": "6",
+                                    "template": "bankInvoicePaymentGroup-template",
+                                    "requiresDocument": false,
+                                    "isCustom": false,
+                                    "description": null,
+                                    "requiresAuthentication": false,
+                                    "dueDate": "2021-09-28T14:11:42.5154946Z",
+                                    "availablePayments": null
+                                }
+                            ],
+                            "payments": [],
+                            "giftCards": [],
+                            "giftCardMessages": [],
+                            "availableAccounts": [],
+                            "availableTokens": []
+                        },
+                        "PointsPrice": 995,
+                        "PointsListPrice": 995,
+                        "conversionRate": 0.02
+                    }
+                }
+            ],
+            "Videos": [],
+            "estimatedDateArrival": null
+        }
+    ],
+    "favorited": false
 }
